@@ -9,22 +9,29 @@ import java.util.Scanner;
 
 public class ConsoleRunner {
 
-public static void main(String[] args) {
-    Scanner scanner = new Scanner(System.in);//ввод с консоли
-    Parser parser = new Parser();
-    String line;
-    Printer printer = new Printer();
-    while (!(line=scanner.
-            nextLine()).
-            equals("end")){
-        Var result=parser.calc(line.trim());
-        printer.print(result);
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);//ввод с консоли
+        Parser parser = new Parser();
+        String line;
+        Printer printer = new Printer();
+        while (!(line = scanner.
+                nextLine()).
+                equals("end")) {
+            Var result = null;
+            try {
+                result = parser.calc(line.trim());
+            } catch (CalcException e) {
+                System.out.println(e.getMessage());
+            }
+            printer.print(result);
+        }
+        if (scanner.equals("printvar")) {
+            Var.printMap();
+        }
+        if (scanner.equals("sortvar")){
+            Var.printMap();
+        }
+
+
     }
-    if(scanner.equals("printvar")) {
-        Var.printMap();
-    }
-
-
-
-}
 }

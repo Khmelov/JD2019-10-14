@@ -11,15 +11,20 @@ public class ConsoleRunner {
             String expression = scanner.nextLine();
             if (expression.equals("end"))
                 break;
-            if (expression.equals("printvar")) {
+            else if (expression.equals("printvar")) {
                 Var.printMap();
             }
-            if(expression.equals("sortvar")){
+            else if(expression.equals("sortvar")){
                 Var.printSortedMap();
             }
             else {
-                Var result = parser.evaluate(expression);
-                printer.print(result);
+                Var result = null;
+                try {
+                    result = parser.evaluate(expression);
+                    printer.print(result);
+                } catch (CalcException e) {
+                    System.out.println(e.getMessage());
+                }
             }
         }
     }

@@ -15,8 +15,12 @@ public class ConsoleRunner {
             if (expression.equals("end"))
                 break;
 
-            Var result = parser.calc(expression);
-            printer.print(result);
+            try {
+                Var result = parser.calc(expression);
+                printer.print(result);
+            } catch (CalcException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }

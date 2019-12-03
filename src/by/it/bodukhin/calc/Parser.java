@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser {
-    Var evaluate(String expression) {
+    Var evaluate(String expression) throws CalcException {
         String[] part = expression.split(Patterns.OPERATION, 2);
         Var right = Var.createVar(part[1]);
         if(expression.contains("=")) {
@@ -32,6 +32,6 @@ class Parser {
                 }
             }
         }
-        return null;
+        throw new CalcException("Что-то странное происходит");
     }
 }

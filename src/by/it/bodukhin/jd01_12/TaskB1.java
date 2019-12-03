@@ -6,20 +6,11 @@ public class TaskB1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ArrayList<String> text = new ArrayList<>();
-        StringBuilder sb = new StringBuilder();
-
-        while (!scanner.nextLine().equals("end")){
-            sb.append(scanner.nextLine());
-        }
-
-        String[] words = sb.toString().split("[\\n,. \"—;/!)(]+");
-
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].equals("isn't")) {
-                text.add("don't");
-            } else {
-                text.add(words[i]);
-            }
+        scanner.useDelimiter("[^a-zA-Z']+");
+        for(;;){
+            String word = scanner.next();
+            if (word.equals("end")) break;
+            text.add(word);
         }
 
         Set<String> oneWord = new HashSet<>(text);

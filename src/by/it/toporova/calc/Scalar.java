@@ -12,7 +12,7 @@ class Scalar extends Var{
     }
 
     @Override
-    public Var add(Var other) {//по умолчанию при вызове констркутора метод вставляется в поведение предка "return super.add(other)". но нам нужно изменить
+    public Var add(Var other) throws CalcException {//по умолчанию при вызове констркутора метод вставляется в поведение предка "return super.add(other)". но нам нужно изменить
         if(other.toString().matches(Patterns.SCALAR)){
             double sum = this.value + ((Scalar) other).value;
             return new Scalar(sum);
@@ -24,7 +24,7 @@ class Scalar extends Var{
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other)throws CalcException {
         if(other.toString().matches(Patterns.SCALAR)){
             double sub = this.value - ((Scalar) other).value;
             return new Scalar(sub);
@@ -35,7 +35,7 @@ class Scalar extends Var{
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other)throws CalcException {
         if(other.toString().matches(Patterns.SCALAR)){
             double mul = this.value*((Scalar) other).value;
             return new Scalar(mul);
@@ -46,9 +46,12 @@ class Scalar extends Var{
     }
 
     @Override
-    public Var div(Var other) {
-        if(other.toString().matches(Patterns.SCALAR)){
+    public Var div(Var other) throws CalcException{
+        if((other.toString().matches(Patterns.SCALAR))&& ((Scalar) other).value!=0){
             double div = this.value/((Scalar) other).value;
+            if (div == 0){
+                throw new CalcException("деление на 0");
+            }
             return new Scalar(div);
         }
         else
