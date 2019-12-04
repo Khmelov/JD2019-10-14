@@ -1,5 +1,7 @@
 package by.it.zimina.jd01_01;
 
+import java.util.Scanner;
+
 /*
 Ускорение свободного падения на Земле и Марсе таково:
 Марс   3.86
@@ -31,4 +33,15 @@ package by.it.zimina.jd01_01;
 */
 class TaskC3 {
 
+    static double getWeight(int weight){
+        double weightMars=weight * 3.86 / 9.81;
+        return Math.round(weightMars * 100) / 100;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double weight = scanner.nextDouble();
+        System.out.println(getWeight((int) weight));
+
+    }
 }

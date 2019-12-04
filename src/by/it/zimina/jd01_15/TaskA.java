@@ -9,7 +9,7 @@ public class TaskA {
         return path+clDir;
     }
 
-    private static String generateMatrix(){
+    protected static String generateMatrix(){
         int matrix[][] = new int[6][4];
         String res = "";
         for (int i = 0; i < matrix.length; i++) {
@@ -23,17 +23,10 @@ public class TaskA {
     }
 
     public static void main(String[] args) {
-        BufferedWriter dos=null;
-        try {
-            dos = new BufferedWriter(
-                          new FileWriter(dir(TaskA.class)+"matrix.txt"));
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        System.out.println();
         }
 
 
 
-    }
+
 }
