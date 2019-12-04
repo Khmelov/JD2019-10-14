@@ -35,7 +35,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other) { //если другой аргумент - скаляр
+    public Var add(Var other) throws CalcException { //если другой аргумент - скаляр
         if (other.toString().matches(Patterns.SCALAR)) {
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {//складываем каждый элемент матрицы со скаляром
@@ -55,7 +55,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other) throws CalcException {
         if (other.toString().matches(Patterns.SCALAR)) {
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {//вычитаем каждый элемент матрицы со скаляром
@@ -74,7 +74,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other) throws CalcException {
         double result = 0;
         if (other.toString().matches(Patterns.SCALAR)) {
             double[] res = Arrays.copyOf(value, value.length);
@@ -95,7 +95,7 @@ class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other) {
+    public Var div(Var other) throws CalcException {
         if (other.toString().matches(Patterns.SCALAR)) {
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {

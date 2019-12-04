@@ -1,4 +1,4 @@
-package by.it.konovalova;
+package by.it.zabauniuk.jd01_01;
 
 public class Main {
 

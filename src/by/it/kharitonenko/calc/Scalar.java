@@ -6,9 +6,11 @@ class Scalar extends Var {
     Scalar(double value) {
         this.value = value;
     }
+
     Scalar(Scalar otherScalar) {
         this.value = otherScalar.value;
     }
+
     Scalar(String strScalar) {
         this.value = Double.parseDouble(strScalar);
     }
@@ -19,43 +21,35 @@ class Scalar extends Var {
     }
 
     @Override
-    public Var add(Var other) {
-        if (other instanceof Scalar)
-        {
+    public Var add(Var other) throws CalcException {
+        if (other instanceof Scalar) {
             return new Scalar(this.value + ((Scalar) other).value);
-        }
-         else
+        } else
             return other.add(this);
     }
 
     @Override
-    public Var sub(Var other) {
-        if (other instanceof Scalar)
-        {
+    public Var sub(Var other) throws CalcException {
+        if (other instanceof Scalar) {
             return new Scalar(this.value - ((Scalar) other).value);
-        }
-        else
+        } else
             return new Scalar(-1).mul(other).add(this);
     }
 
     @Override
-    public Var mul(Var other) {
-        if (other instanceof Scalar)
-        {
+    public Var mul(Var other) throws CalcException {
+        if (other instanceof Scalar) {
             return new Scalar(this.value * ((Scalar) other).value);
-        }
-        else
+        } else
             return other.mul(this);
     }
 
     @Override
-    public Var div(Var other) {
-        if (other instanceof Scalar)
-        {
-            if (((Scalar) other).value == 0) return super.div(other); //check for division by zero
+    public Var div(Var other) throws CalcException {
+        if (other instanceof Scalar) {
+            if (((Scalar) other).value == 0) throw new CalcException("divided by zero"); //check for division by zero
             return new Scalar(this.value / ((Scalar) other).value);
-        }
-        else
-            return other.add(this);
+        } else
+            return super.div(other);
     }
 }

@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser {
-    Var calc(String exrpession) {
+    Var calc(String exrpession) throws CalcException {
         String[] operand = exrpession.split(Patterns.OPERATION);
         Var second = Var.createVar(operand[1]);
 //создана вторая переменная для выражений типа ключ=значение
@@ -33,6 +33,6 @@ class Parser {
 
             }
         }
-        return null;//если ничего не вычислили
+        throw new CalcException("Что-то странное происходит");
     }
 }

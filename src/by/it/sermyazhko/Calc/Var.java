@@ -1,45 +1,50 @@
 package by.it.sermyazhko.Calc;
 
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 abstract class Var implements Operation {
 
-    private static HashMap<String ,Var> vars = new HashMap<>();
+    private static Map<String,Var> vars=new HashMap<>();
+
+    static void printMap(){
+
+        for (Map.Entry<String, Var> elem : vars.entrySet()) {
+            if (elem.getValue()!=null) {
+                System.out.printf("%s=%s", elem.getKey(), elem.getValue().toString());
+                System.out.println();
+            }
+        }
+    }
+
 
     static void set(String name, Var var){
-        vars.put(name, var);
+        vars.put(name,var);
     }
 
-    static Var get(String name, Var var){
-       return  vars.get(name);
-    }
-
-    @Override
-    public Var add(Var other) {
-        System.out.printf("Сложение %s + %s невозможно\n",this,other);
-        //TODO add exception
-        return null;
+    static Var get(String name){
+        return vars.get(name);
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.printf("Вычитание %s - %s невозможно\n",this,other);
-        //TODO add exception
-        return null;
+    public Var add(Var other) throws CalcException {
+        throw new CalcException(String.format("Сложение %s + %s невозможно\n", this, other));
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.printf("Умножение %s * %s невозможно\n",this,other);
-        //TODO add exception
-        return null;
+    public Var sub(Var other) throws CalcException {
+        throw new CalcException(String.format("Вычитание %s - %s невозможно\n",this,other));
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.printf("Деление %s / %s невозможно\n",this,other);
-        //TODO add exception
-        return null;
+    public Var mul(Var other) throws CalcException {
+        throw new CalcException(String.format("Умножение %s * %s невозможно\n",this,other));
+    }
+
+    @Override
+    public Var div(Var other) throws CalcException {
+        throw new CalcException(String.format("Деление %s / %s невозможно\n", this, other));
     }
 
     @Override
@@ -58,10 +63,10 @@ abstract class Var implements Operation {
            return new Matrix(value);
        }
        else if (vars.containsKey(value))
-          // return vars;
-           return null;
+           return vars.get(value);
        else
            return null;
     }
 
 }
+

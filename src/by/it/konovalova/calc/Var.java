@@ -12,7 +12,7 @@ abstract class Var implements Operation {
         return var;
     }
 
-    public static Var createVar(String operand) {
+    public static Var createVar(String operand) throws CalcException{
 
         if (operand.matches(Patterns.SCALAR))
             return new Scalar(operand);
@@ -22,32 +22,28 @@ abstract class Var implements Operation {
             return new Matrix(operand);
         else if (vars.containsKey(operand))
             return vars.get(operand);
-        return null;
+        throw new CalcException("Невозможно создать" + operand);
 
 
     }
 
     @Override
-    public Var add(Var other) {
-        System.out.println("Операция сложения " + this + "+" + other + " невозможна");
-        return null;
+    public Var add(Var other) throws CalcException {
+        throw new CalcException("Операция сложения " + this + "+" + other + " невозможна");
     }
 
     @Override
-    public Var sub(Var other) {
-        System.out.println("Операция вычитания " + this + "-" + other + " невозможна");
-        return null;
+    public Var sub(Var other) throws CalcException {
+        throw new CalcException("Операция вычитания " + this + "-" + other + " невозможна");
     }
 
     @Override
-    public Var mul(Var other) {
-        System.out.println("Операция умножения " + this + "*" + other + " невозможна");
-        return null;
+    public Var mul(Var other) throws CalcException {
+        throw new CalcException("Операция умножения " + this + "*" + other + " невозможна");
     }
 
     @Override
-    public Var div(Var other) {
-        System.out.println("Операция деления " + this + "/" + other + " невозможна");
-        return null;
+    public Var div(Var other) throws CalcException {
+        throw new CalcException("Операция деления " + this + "/" + other + " невозможна");
     }
 }

@@ -1,7 +1,5 @@
 package by.it.zimina.jd01_07;
 
-import java.util.Arrays;
-
 class Matrix extends Var {
     private double[][] value;
 

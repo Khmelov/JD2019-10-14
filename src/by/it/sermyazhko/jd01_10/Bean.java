@@ -1,7 +1,5 @@
 package by.it.sermyazhko.jd01_10;
 
-import java.lang.reflect.Method;
-
 class Bean {
 
     @Param(a=10, b=15)

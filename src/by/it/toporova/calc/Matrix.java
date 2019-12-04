@@ -14,8 +14,6 @@ public class Matrix extends Var {
         this.value = otherMatrix.value;
     }
 
-
-
     Matrix(String  strMatrix) {
         String[] arr = strMatrix.replaceAll("[{ }]","").split(",");
         value = new double[2][2];
@@ -30,7 +28,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other) {
+    public Var add(Var other)throws CalcException {
         if (other instanceof Scalar) {
             double valueScalar = ((Scalar) other).getValue();
             double[][] result = new double[value.length][value[0].length];
@@ -56,7 +54,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var sub(Var other) {
+    public Var sub(Var other)throws CalcException {
         if (other instanceof Scalar) {
             //double valueScalar = ((Scalar) other).getValue();
             double[][] result = new double[value.length][value[0].length];
@@ -82,7 +80,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other) {
+    public Var mul(Var other)throws CalcException {
         if (other instanceof Scalar){
             double[][]result = new double[value.length][value[0].length];
             for (int i = 0; i < value.length; i++) {
@@ -118,26 +116,44 @@ public class Matrix extends Var {
         return super.mul(other);
     }
 
-
-    
-    
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder("{{");
-      //  AtomicReference<String> delimiter = new AtomicReference<>("");
-        String delimiter="";
-
-        for (int i = 0; i < value.length; i++) {
-
-            for (int j = 0; j < value[0].length; j++) {
-                sb.append(delimiter).append(value[i][j]);
-                if (j<value[0].length-1) {
-                    sb.append(", ");
+    public Var div(Var other) throws CalcException{
+        if (other instanceof Scalar && ((Scalar) other).getValue()!=0) {
+            double valueScalar = ((Scalar) other).getValue();
+            double[][] result = new double[value.length][value[0].length];
+            for (int i = 0; i < value.length; i++) {
+                for (int j = 0; j < value[0].length; j++) {
+                    result[i][j] = value[i][j] / valueScalar;
                 }
             }
-            if (i != value.length - 1) sb.append("}, {");//разобрать
-            else sb.append("}}");
+            return new Matrix(result);
         }
+        return super.div(other);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("{");
+
+        for (int i = 0; i <value.length-1 ; i++) {
+            String delimeter = "";
+            sb.append("{");
+            for (int j = 0; j < value[0].length; j++) {
+                sb.append(delimeter).append(value[i][j]);
+                delimeter = ", ";
+            }
+            sb.append("}, ");
+        }
+        for (int i = value.length-1; i <value.length ; i++) {
+            String delimeter = "";
+            sb.append("{");
+            for (int j = 0; j < value[0].length; j++) {
+                sb.append(delimeter).append(value[i][j]);
+                delimeter = ", ";
+            }
+            sb.append("}");
+        }
+        sb.append("}");
         return sb.toString();
     }
 }
