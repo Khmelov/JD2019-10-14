@@ -35,13 +35,13 @@ class TaskC3 {
 
     static double getWeight(int weight){
         double weightMars=weight * 3.86 / 9.81;
-        return Math.round(weightMars * 100) / 100;
+        return (double) Math.round(weightMars * 100) / 100;
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        double weight = scanner.nextDouble();
-        System.out.println(getWeight((int) weight));
+        int weight = scanner.nextInt();
+        System.out.println(getWeight(weight));
 
     }
 }
