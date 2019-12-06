@@ -29,7 +29,9 @@ public class TaskA {
                         .replace(",","")
                         .replace("[","")
                         .replace("]","")); */
-          printWriter.printf("%3s", Arrays.toString(row));
+          printWriter.printf("%3s\n", Arrays.toString(row)
+                  .replace("[","")
+                  .replace("]",""));
             }
             printWriter.close();
         } catch (IOException e) {
@@ -41,8 +43,11 @@ public class TaskA {
     public static void main(String[] args) {
         int[][] matrix = generateMatrix();
         for (int[] row : matrix) {
-            System.out.println(Arrays.toString(row)
+            /* System.out.println(Arrays.toString(row)
                     .replace(",","")
+                    .replace("[","")
+                    .replace("]","")); */
+            System.out.printf("%3s\n", Arrays.toString(row)
                     .replace("[","")
                     .replace("]",""));
         }
