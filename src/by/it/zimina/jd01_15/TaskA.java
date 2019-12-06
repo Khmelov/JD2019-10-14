@@ -23,13 +23,13 @@ public class TaskA {
 
     private static void writeMatrix(int[][] matrix){
         try {
-            PrintWriter printWriter=new PrintWriter(dir(TaskA.class) + "martix.txt");
+            PrintWriter printWriter=new PrintWriter(dir(TaskA.class) + "matrix.txt");
             for (int[] row : matrix) {
           /*      printWriter.println(Arrays.toString(row)
                         .replace(",","")
                         .replace("[","")
                         .replace("]","")); */
-          printWriter.printf("%3s\n", Arrays.toString(row)
+          printWriter.printf("%3s \n", Arrays.toString(row)
                   .replace("[","")
                   .replace("]",""));
             }
@@ -47,7 +47,7 @@ public class TaskA {
                     .replace(",","")
                     .replace("[","")
                     .replace("]","")); */
-            System.out.printf("%3s\n", Arrays.toString(row)
+            System.out.printf("%3s \n", Arrays.toString(row)
                     .replace("[","")
                     .replace("]",""));
         }
