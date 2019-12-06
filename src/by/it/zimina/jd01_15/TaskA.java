@@ -25,10 +25,11 @@ public class TaskA {
         try {
             PrintWriter printWriter=new PrintWriter(dir(TaskA.class) + "martix.txt");
             for (int[] row : matrix) {
-                printWriter.println(Arrays.toString(row)
+          /*      printWriter.println(Arrays.toString(row)
                         .replace(",","")
                         .replace("[","")
-                        .replace("]",""));
+                        .replace("]","")); */
+          printWriter.printf("%3s", Arrays.toString(row));
             }
             printWriter.close();
         } catch (IOException e) {
