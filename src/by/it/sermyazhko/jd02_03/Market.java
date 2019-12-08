@@ -1,7 +1,10 @@
 package by.it.sermyazhko.jd02_03;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 public class Market {
@@ -15,8 +18,6 @@ public class Market {
             Cashier cashier = new Cashier(i);
             threadPool.execute(cashier);
         }
-
-
         int numberBuyer = 0;
         while (Dispatcher.marketOpened()) {
             int currentCount = Helper.random(2);

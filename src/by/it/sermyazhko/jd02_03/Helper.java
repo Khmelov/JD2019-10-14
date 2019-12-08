@@ -1,5 +1,6 @@
 package by.it.sermyazhko.jd02_03;
 
+import java.util.Map;
 import java.util.Random;
 
 class Helper {
@@ -22,5 +23,15 @@ class Helper {
         }
     }
 
+    //генерирует случайный товар из магазина
+    static Map.Entry<String,Integer> randomGoods (Map<String,Integer> map){
+        int random = random(0, map.size() - 1);
+        int count = 0;
+        for (Map.Entry<String,Integer> element : map.entrySet()) {
+            if(random==count) return element;
+            count++;
+        }
+        return null;
+    }
 
 }
