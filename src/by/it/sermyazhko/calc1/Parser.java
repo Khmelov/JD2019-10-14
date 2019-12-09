@@ -1,39 +1,78 @@
 package by.it.sermyazhko.calc1;
 
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser{
-    Var calc(String expression) throws CalcException {
-        String[] exp = expression.split(PatternForExpression.OPERATION, 2);
 
-        if (exp.length == 1){
-            return Var.createVar(expression);
+    private Map<String,Integer> priority=new HashMap<String,Integer>(){
+        {
+            this.put("=",0);
+            this.put("+",1);
+            this.put("-",1);
+            this.put("*",2);
+            this.put("/",2);
         }
+    };
 
-        Var right = Var.createVar(exp[1]);
 
-        if(expression.contains("=")){
-            Var.set(exp[0],right);
+    private int getIndex(List<String> operators) {
+        int index=-1;
+        int prior=-1;
+        for (int i = 0; i < operators.size(); i++) {
+            String op = operators.get(i);
+            if (priority.get(op)>prior){
+                prior=priority.get(op);
+                index=i;
+            }
+        }
+        return index;
+    }
+
+    private Var oneOperation(String strLeft, String operation, String strRight) throws CalcException {
+        Var right = Var.createVar(strRight);
+        if (operation.equals("=")) {
+            Var.set(strLeft, right);
             return right;
         }
-
-        Var left = Var.createVar(exp[0]);
-        if (left != null && right != null){
-            Matcher matcher = Pattern
-                    .compile(PatternForExpression.OPERATION)
-                    .matcher(expression);
-            if (matcher.find()){
-                String result = matcher.group();
-                switch (result){
-                    case "+": return left.add(right);
-                    case "-": return left.sub(right);
-                    case "*": return left.mul(right);
-                    case "/": return left.div(right);
-                }
+        Var left =  Var.createVar(strLeft);
+        if (left != null && right != null) {
+            switch (operation) {
+                case "+":
+                    return left.add(right);
+                case "-":
+                    return left.sub(right);
+                case "*":
+                    return left.mul(right);
+                case "/":
+                    return left.div(right);
             }
-
         }
-        return null;
+        throw new CalcException("Не должны сюда попасть");
+    }
+
+    Var calc(String expression) throws CalcException {
+
+        String[] part = expression.split(PatternForExpression.OPERATION);
+        if (part.length == 1) {
+            return Var.createVar(expression);
+        }
+        List<String> operands = new ArrayList<String>(Arrays.asList(part));
+        List<String> operators = new ArrayList<>();
+        Matcher matcher = Pattern.compile(PatternForExpression.OPERATION).matcher(expression);
+        while (matcher.find()){
+            operators.add(matcher.group());
+        }
+
+        while (operators.size()>0){
+            int index = getIndex(operators);
+            String left = operands.remove(index);
+            String right = operands.remove(index);
+            String op = operators.remove(index);
+            Var result = oneOperation(left, op, right);
+            operands.add(index,result.toString());
+        }
+        return Var.createVar(operands.get(0));
     }
 }

@@ -11,7 +11,7 @@ public class Market {
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Market opened");
-        Goods.setProducts();
+        //Goods.setProducts();
 
         ExecutorService threadPool = Executors.newFixedThreadPool(5);
 
