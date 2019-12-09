@@ -1,6 +1,7 @@
 package by.it.sermyazhko.jd02_03;
 
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
@@ -8,16 +9,10 @@ import java.util.concurrent.Semaphore;
 class Buyer extends Thread implements IBuyer {
 
     private static Semaphore sem = new Semaphore(20);
-    public int getAmount() {
-        return amount;
-    }
 
     //сумма чека
     private int amount;
-    public Map<String, Integer> getGoods() {
-        return goods;
-    }
-    //товары каждого покупателя
+    //корзина из товаров у каждого покупателя
     private Map<String,Integer> goods = new HashMap<>();
 
     private boolean waitFlag = false;
@@ -38,29 +33,28 @@ class Buyer extends Thread implements IBuyer {
         try {
             sem.acquire();
             chooseGoods();
-
      } catch (InterruptedException e) {
             e.printStackTrace();
         }
         finally {
             sem.release();
         }
-
-        count();
-        writeInfo();
         goToQueue();
+        checkAmount();
+        checkInformation();
         goOut();
         Dispatcher.buyerLeaveMarket();
-
     }
 
     @Override
-    public void writeInfo() {
-        System.out.printf("Goods that %s bought: \n", this);
-        for (Map.Entry<String, Integer> thing : this.getGoods().entrySet()) {
-            System.out.printf("%4s%s, cost - %d\n","-", thing.getKey(), thing.getValue());
+    public void checkInformation() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("Goods that %s bought: \n", this));
+        for (Map.Entry<String, Integer> thing : goods.entrySet()) {
+            sb.append(String.format("%4s%s, cost - %d\n","-", thing.getKey(), thing.getValue()));
         }
-        System.out.printf("Total amount of check:%d\n", this.getAmount());
+        sb.append(String.format("Total amount of check:%d", this.amount));
+        System.out.println(sb);
     }
 
     @Override
@@ -72,8 +66,9 @@ class Buyer extends Thread implements IBuyer {
     public void chooseGoods() {
         System.out.println(this + " started to choose goods");
 
+        //собираем вещи
         for (int i = 0; i < Helper.random(1,4); i++) {
-            this.goods.put(String.format("GOODS%d",i),i*3+17);
+            this.goods.put(Helper.randomGoods(Goods.products).getKey(), Helper.randomGoods(Goods.products).getValue());
         }
 
         int timeout = Helper.random(500, 2000);
@@ -101,7 +96,7 @@ class Buyer extends Thread implements IBuyer {
     }
 
     @Override
-    public void count() {
+    public void checkAmount() {
         for (Map.Entry<String, Integer> thing : this.goods.entrySet()) {
             this.amount+=thing.getValue();
         }

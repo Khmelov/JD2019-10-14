@@ -11,6 +11,7 @@ public class Market {
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Market opened");
+        Goods.setProducts();
 
         ExecutorService threadPool = Executors.newFixedThreadPool(5);
 
@@ -31,7 +32,6 @@ public class Market {
         }
 
         threadPool.shutdown();
-        //noinspection StatementWithEmptyBody
         while (!threadPool.awaitTermination(1, TimeUnit.MILLISECONDS));
         System.out.println("Market closed");
     }
