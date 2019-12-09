@@ -7,7 +7,7 @@ import java.util.concurrent.Semaphore;
 
 class Buyer extends Thread implements IBuyer {
 
-    private static Semaphore sem = new Semaphore(5);
+    private static Semaphore sem = new Semaphore(20);
     public int getAmount() {
         return amount;
     }
