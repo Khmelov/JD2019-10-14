@@ -1,70 +1,62 @@
 package by.it.kazak.jd01_14;
 
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Arrays;
+import java.io.*;
+import java.util.Objects;
+
 
 public class TaskC {
 
-    public static void main(String[] args) {
-        String name = "kazak";
-        String[] packagesNames = getNameOfPackages(name);
-        Arrays.sort(packagesNames);
-        String [] filesNames = new String[0];
-        for (String strPackage : packagesNames) {
-            if (strPackage.equals(".DS_Store")) System.out.println("file:.DS_Store");
-            else {
-                System.out.println();
-                System.out.println("dir: "+strPackage);
-                filesNames = getNameOfFiles(strPackage, name);
-                for (String file : filesNames) {
-                    System.out.println("file: " + file);
-                }
-            }
+    public static void main(String[] args) throws IOException {
+        //write
+        Class<by.it.kazak.jd01_14.TaskC> cClass = by.it.kazak.jd01_14.TaskC.class;
+        String p = System.getProperty("user.dir")
+                + File.separator + "src" + File.separator +
+                cClass
+                        .getName()
+                        .replace(cClass.getSimpleName(), "")
+                        .replace(".", File.separator) +"resultTaskC.txt";
+        System.out.println(p);
+        BufferedWriter bw = null;
+        try {
+            bw = new BufferedWriter(new FileWriter(p));
+        } catch (IOException ex) {
+            System.out.println("Ошибка записи" + ex);
         }
-        saveToFileTxt(packagesNames,filesNames);
-    }
 
-    private static String[] getNameOfPackages(String name) {
-        String src = System.getProperty("user.dir") + File.separator + "src" + File.separator;
-        String  wayToPackage = ("by"+File.separator+"it"+File.separator+name);
-        File file = new File(src+wayToPackage);
-        return file.list();
-    }
-
-    private static String[] getNameOfFiles(String nameOfPackage, String name) {
-        String src = System.getProperty("user.dir") + File.separator + "src" + File.separator;
-        String  wayToPackage = ("by"+File.separator+"it"+File.separator+name);
-        File file = new File(src+wayToPackage+File.separator+nameOfPackage);
-        return file.list();
-    }
-
-
-    private static String getFileName() {
-        String src = System.getProperty("user.dir") + File.separator + "src" + File.separator;
-        String strPackage = TaskC.class.getPackage().getName().replace(".", File.separator);
-        return src + strPackage + File.separator + "resultTaskC.txt";
-    }
-
-
-    private static void saveToFileTxt(String[] packages, String[] files) {
-        String fileName = getFileName();
-        try( PrintWriter printWriter = new PrintWriter(new FileWriter(fileName))) {
-            for (String s1 : packages) {
-                if (s1.equals(".DS_Store")) printWriter.write("file:.DS_Store\n");
-                else {
-                    printWriter.write("dir:" + s1 + "\n");
-                    for (String s2 : files) {
-                        printWriter.write("file:" + s2 + "\n");
+        String path = getPath();
+        StringBuilder sb = new StringBuilder();
+        System.out.println(path);
+        File f = new File(path);
+        if(f.isDirectory()) {
+            for (File item : Objects.requireNonNull(f.listFiles())) {
+                if(item.isDirectory()) {
+                    sb.append("dir:").append(item.getName()).append("\n");
+                    for (File file : Objects.requireNonNull(item.listFiles())){
+                        sb.append("file:").append(file.getName()).append("\n");
                     }
                 }
+                else if(item.isFile()){
+                    sb.append("file:").append(item.getName()).append("\n");
+                }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(sb);
         }
+        assert bw != null;
+        bw.append(sb);
+        bw.close();
     }
 
+
+    private static String getPath() {
+        return System.getProperty("user.dir")
+                + File.separator + "src" + File.separator +
+                TaskC.class
+                        .getSimpleName()
+                        .replace(TaskC.class.getSimpleName(), "")
+                        .replace(".", File.separator)  + "by\\it\\kazak" + File.separator;
+
+    }
 }
+
+

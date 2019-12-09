@@ -17,7 +17,7 @@ public class Runner {
         return super.equals(obj);
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CalcException{
         Var s = new Scalar(3.0);
         Var s1 = new Scalar(4.0);
         Var v = new Vector(new double[]{1,2,3}); // закомментируйте вектор и/или
