@@ -17,7 +17,7 @@ class Buyer extends Thread implements IBuyer {
     public Map<String, Integer> getGoods() {
         return goods;
     }
-    //корзина каждого покупателя
+    //товары каждого покупателя
     private Map<String,Integer> goods = new HashMap<>();
 
     private boolean waitFlag = false;

@@ -19,7 +19,7 @@ class Helper {
         try {
             Thread.sleep(timeout/ Dispatcher.kSpeed);
         } catch (InterruptedException e) {
-            System.out.println("Unexpected interupt");
+            System.out.println("Unexpected interrupt");
         }
     }
 
