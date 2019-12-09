@@ -1,7 +1,5 @@
 package by.it.sermyazhko.jd02_03;
 
-
-import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
