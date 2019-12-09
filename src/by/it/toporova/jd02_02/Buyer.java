@@ -11,7 +11,7 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         super("buyer №" + number);
         this.buyerNumber = number;
         Dispatcher.newBuyer();
-        if (Helper.getRandom(1, 4) == 1) {
+        if (Dispatcher.getBuyersCount()%4 == 0) {
             this.retired = true;
             this.setName(this.getName() + "(retired)");
         }
@@ -33,17 +33,16 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
         Dispatcher.buyerLeaved(this);
     }
 
-    //метод для кастования buyer'a к object'у
     static Object getMonitor(Buyer buyer) {
         return buyer;
     }
 
-    //геттер для номера покупателя
+    //геттер для номера покупателя. Использовать при выводе результата
     int getBuyerNumber() {
+
         return buyerNumber;
     }
 
-    //покупатель отправляется в очередь
     private void goToQueue() {
         synchronized (Dispatcher.LOCK_CONSOLE) {
             System.out.println(this + " went to the queue");

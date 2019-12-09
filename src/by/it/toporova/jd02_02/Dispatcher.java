@@ -67,22 +67,18 @@ class Dispatcher {
             overallPrice += res;
         }
     }
-
-    //геттер количества работающих касс
     static int getCountCashiers() {
         synchronized (LOCK_CASHIERS){
             return countCashiers;
         }
     }
 
-    //метод "новая касса"
     static void newCashier() {
         synchronized (Dispatcher.LOCK_CASHIERS) {
             Dispatcher.countCashiers++;
         }
     }
 
-    //метод "касса закрыта"
     static void cashierCloses() {
         synchronized (Dispatcher.LOCK_CASHIERS) {
             Dispatcher.countCashiers--;
