@@ -8,27 +8,41 @@ public class ListA<T> implements List<T> {
 
     @Override
     public boolean add(T t) {
-        if (elements.length == size) {
-            elements = Arrays.copyOf(elements,size*3/2+1);
-            elements[size++]=t;
+        if (size==elements.length) {
+            elements = Arrays.copyOf(elements, (elements.length * 3) / 2 + 1);
+            elements[size++] = t;
+            return true;
+        } else {
+            elements[size++] = t;
+            return true;
+
         }
-        return true;
     }
 
     @Override
     public void add(int index, T element) {
-        if (elements.length == size) {
+        if (size==elements.length) {
             elements = Arrays.copyOf(elements, size * 3 / 2 + 1);
-            System.arraycopy(elements, index, elements, index + 1, size - index);
+            System.arraycopy(elements, index, elements, index + 1, (size) - index);
+            elements[index] = element;
+            size++;
+        } else {
+            elements = Arrays.copyOf(elements, size * 3 / 2 + 1);
+            System.arraycopy(elements, index, elements, index + 1, (size) - index);
             elements[index] = element;
             size++;
         }
-    }
 
+    }
+//    Первым параметром является массив-источник.
+//    Вторым параметром является позиция начала нового массива.
+//    Третий параметр — массив-назначения.
+//    Четвертый параметр является начальным положением целевого массива.
+//    Последний параметр это количество элементов, которые будут скопированы. Вот код, чтобы скопировать последние пять элементов исходного массива в конечный массив (массив-назначения):
     @Override
     public T remove(int index) {
         T del=elements[index];
-        System.arraycopy(elements,index+1, elements, index,--size-index);
+        System.arraycopy(elements,index+1, elements, index,(size--)-index);
         return del;
     }
     @Override
@@ -45,6 +59,41 @@ public class ListA<T> implements List<T> {
 
         return elements[index];
     }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends T> c) {
+        return false;
+    }
+
+    @Override
+    public T set(int index, T element) {
+        return null;
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        if(o==null) {
+            for (int i = 0; i < size; i++) {
+                if(elements[i]==null) {
+                    return i;
+                }
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if(o.equals(elements[i])) {
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+
 
     @Override
     public String toString() {
@@ -94,15 +143,6 @@ public class ListA<T> implements List<T> {
         return false;
     }
 
-    @Override
-    public boolean addAll(Collection<? extends T> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(int index, Collection<? extends T> c) {
-        return false;
-    }
 
     @Override
     public boolean removeAll(Collection<?> c) {
@@ -119,30 +159,7 @@ public class ListA<T> implements List<T> {
 
     }
 
-    @Override
-    public T set(int index, T element) {
-        return null;
-    }
-
-    @Override
-    public int indexOf(Object o) {
-        if(o==null) {
-            for (int i = 0; i < size; i++) {
-                if(elements[i]==null) {
-                    return i;
-                }
-            }
-        } else {
-            for (int i = 0; i < size; i++) {
-                if(o.equals(elements[i])) {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }
-
-    @Override
+ @Override
     public int lastIndexOf(Object o) {
         return 0;
     }
