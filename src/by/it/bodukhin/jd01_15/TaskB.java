@@ -11,6 +11,7 @@ public class TaskB {
         String filename = path + "TaskB.java";
         StringBuilder sb = new StringBuilder();
         writeToSb(filename, sb);
+        deleteComments(sb);
         System.out.println(sb);
         printToFile(path, sb);
     }
@@ -36,13 +37,27 @@ public class TaskB {
 
     /**
      *
-     * @param filename
      * @param sb
      */
+
+    private static void deleteComments(StringBuilder sb) {
+        int start, end;
+        while ((start = sb.indexOf("//"))>=0 && (end = sb.indexOf("\n",start))>=0){
+            sb.delete(start, end);
+        }
+        while ((start = sb.indexOf("/*"))>=0 && (end = sb.indexOf("*/"))>=0){
+            sb.delete(start, end+2);
+        }
+    }
 
 /* 1й комментарий
 на 2 строки */
 
+    /**
+     *
+     * @param filename
+     * @param sb
+     */
     private static void writeToSb(String filename, StringBuilder sb) {
         boolean del = false;
         try (
@@ -50,20 +65,7 @@ public class TaskB {
                         new FileReader(filename))
         ) {
             while (br.ready()) {
-               String line = br.readLine();
-               if(line.startsWith("//")){
-                   sb.append("");
-               }
-               else if(line.startsWith("/*") | line.startsWith("/**")){
-                   del = true;
-               }
-               else if (del == false) {
-                   sb.append(line).append(System.lineSeparator());
-               }
-               else if(line.endsWith("*/")) {
-                   del = false;
-
-               }
+               sb.append(br.readLine()).append(System.lineSeparator());
             }
         } catch (IOException e) {
             e.printStackTrace();
