@@ -47,7 +47,10 @@ class Scalar extends Var {
     @Override
     public Var div(Var other) throws CalcException {
         if (other instanceof Scalar){
-            return new Scalar(this.value/((Scalar) other).value);
+            double temp = ((Scalar) other).value;
+            if (temp == 0)
+                throw new CalcException("деление на 0");
+            return new Scalar(this.value/temp);
         }
         else
             return super.div(other);

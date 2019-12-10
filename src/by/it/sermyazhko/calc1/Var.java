@@ -1,11 +1,17 @@
 package by.it.sermyazhko.calc1;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 abstract class Var implements Operation {
 
-    private static Map<String, Var> vars=new HashMap<>();
+    private static Map<String, Var> vars = new HashMap<>();
 
     static void printMap(){
 
@@ -66,6 +72,42 @@ abstract class Var implements Operation {
        else
            return null;
     }
+
+    static void save()  {
+        try (PrintWriter writer = new PrintWriter(getFileName())) {
+            for (Map.Entry<String, Var> pair : vars.entrySet()) {
+                writer.printf("%s=%s\n", pair.getKey(), pair.getValue().toString());
+            }
+        } catch (IOException e) {
+            System.out.println("file error");
+        }
+    }
+
+
+    static void load() {
+        try {
+            Parser parser = new Parser();
+            for (String line : Files.lines(Paths.get(getFileName()))
+                    .collect(Collectors.toList())
+            ) {
+                parser.calc(line);
+            }
+        } catch (IOException | CalcException e) {
+            System.out.println("file error");
+        }
+
+
+    }
+
+    private static String getFileName() {
+        return System.getProperty("user.dir")
+                + File.separator + "src" + File.separator +
+                Var.class
+                        .getName()
+                        .replace(Var.class.getSimpleName(), "")
+                        .replace(".", File.separator) + "vars.txt";
+    }
+
 
 }
 
