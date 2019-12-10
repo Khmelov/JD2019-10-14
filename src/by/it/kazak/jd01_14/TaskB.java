@@ -43,7 +43,7 @@ public class TaskB {
                 Matcher matcher2 = ps.matcher(s);
                 while (matcher2.find()) signs++;
             }
-            count = "words = " + words + ", punctuation marks = " + signs;
+            count = "words=" + words + ", punctuation marks=" + signs;
 
         } catch (IOException e) {
             e.printStackTrace();
