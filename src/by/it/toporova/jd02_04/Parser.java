@@ -1,66 +1,85 @@
 package by.it.toporova.jd02_04;
 
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser {
-    Var oneOperation(String strLeft, String operate, String strRight) throws CalcException {
-        //String[] operand = exrpession.split(Patterns.OPERATION);
-        Var second = Var.createVar(strRight);
-//создана вторая переменная для выражений типа ключ=значение
-        //вызов метода saveVar, где 0 операнд - ключ
-        if (operate.equals("=")) {
-             Var.saveVar(strLeft, second);
-
+    private Map<String,Integer> priority=new HashMap<String,Integer>(){
+        {
+            this.put("=",0);
+            this.put("+",1);
+            this.put("-",1);
+            this.put("*",2);
+            this.put("/",2);
         }
-        Var first = Var.createVar(strLeft); //передаем в var для преобразоования
-
-            switch (operate) {
-                case "+":
-                    return first.add(second);
-                case "-":
-                    return first.sub(second);
-                case "*":
-                    return first.mul(second);
-                case "/":
-                    return first.div(second);
+    };
 
 
+    private int getIndex(List<String> operators) {
+        int index=-1;
+        int prior=-1;
+        for (int i = 0; i < operators.size(); i++) {
+            String op = operators.get(i);
+            if (priority.get(op)>prior){
+                prior=priority.get(op);
+                index=i;
             }
-
-        throw new CalcException("Что-то странное происходит");
+        }
+        return index;
     }
 
 
-    Var calc(String exrpession) throws CalcException {
-        String[] operand = exrpession.split(Patterns.OPERATION);
-        Var second = Var.createVar(operand[1]);
-//создана вторая переменная для выражений типа ключ=значение
-        //вызов метода saveVar, где 0 операнд - ключ
-        if (exrpession.contains("=")) {
-            return Var.saveVar(operand[0], second);
+    private Var oneOperation(String strLeft, String operation, String strRight) throws CalcException {
+        Var right = Var.createVar(strRight);
+        //A=3 refactoring it
+        if (operation.equals("=")) {
+            Var.saveVar(strLeft, right);
+            return right;
         }
-        Var first = Var.createVar(operand[0]); //передаем в var для преобразоования
-        if (first == null || second == null)
-            return null; //TODO create error
 
-        Pattern p = Pattern.compile(Patterns.OPERATION); //задание шаблона
-        Matcher matcher = p.matcher(exrpession); //сравнение шаблона с выражением
-        if (matcher.find()) {//если матчет нашел ч-либо, то
-            String operation = matcher.group();
+        Var left = Var.createVar(strLeft);
+        if (left != null && right != null) {
             switch (operation) {
                 case "+":
-                    return first.add(second);
+                    return left.add(right);
                 case "-":
-                    return first.sub(second);
+                    return left.sub(right);
                 case "*":
-                    return first.mul(second);
+                    return left.mul(right);
                 case "/":
-                    return first.div(second);
-
-
+                    return left.div(right);
             }
+
         }
-        throw new CalcException("Что-то странное происходит");
+        throw new CalcException("Что то странное происходит!!!!");
     }
+
+
+    Var evaluate(String expression) throws CalcException {
+        //222+3333+6666
+        String[] part = expression.split(Patterns.OPERATION);
+        if (part.length == 1) {
+            return Var.createVar(expression);
+        }
+        ArrayList<String> operands=new ArrayList<String>(Arrays.asList(part));
+        List<String> operators=new ArrayList<>();
+        Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
+        while (matcher.find()){
+            operators.add(matcher.group());
+        }
+
+        while (operators.size()>0){
+            int index=getIndex(operators);
+            String left=operands.remove(index);
+            String rigth=operands.remove(index);
+            String op=operators.remove(index);
+            Var result = oneOperation(left, op, rigth);
+            operands.add(index,result.toString());
+        }
+        return Var.createVar(operands.get(0));
+    }
+
 }
+
+

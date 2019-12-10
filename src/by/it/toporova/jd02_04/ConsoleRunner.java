@@ -19,7 +19,7 @@ public class ConsoleRunner {
                 equals("end")) {
             Var result = null;
             try {
-                result = parser.calc(line.trim());
+                result = parser.evaluate(line.trim());
             } catch (CalcException e) {
                 System.out.println(e.getMessage());
             }
