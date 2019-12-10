@@ -6,7 +6,7 @@ import java.util.Map;
 class Goods {
     static Map<String, Double> priceList = new HashMap<>(); //карта товаров
 
-    static void loadPriceList() {//предопределенный список и цены на товар
+    Goods() {
         priceList.put("хлеб", 0.9);
         priceList.put("молоко", 1.3);
         priceList.put("кефир", 1.5);
