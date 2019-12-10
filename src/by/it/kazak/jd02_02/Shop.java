@@ -1,65 +1,63 @@
 package by.it.kazak.jd02_02;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Shop {
 
     public static void main(String[] args) {
+
+        List<Thread> buyers = new ArrayList<>();
         System.out.println("------------shop is opened---------------");
-        List<Thread> threads = new ArrayList<>();
-        int numberCashiers = 0;
-
-        for (int i = 1; i <= 2; i++) {
-            Cashier cashier = new Cashier(++numberCashiers);
-            Thread threadCashier = new Thread(cashier);
-            threadCashier.start();
-            threads.add(threadCashier);
-
-        }
-
+        Counter.executorService.execute(new Cashier());
         int numberBuyer = 0;
         int time = 0;
 
+
         while (Counter.planComplete()) {
-            if (time <= 30) {
-                int count = Helper.random(2);
+            if (time < 30) {
+                int count = Helper.random();
                 if (!(Counter.getBuyerInMarket() >= time + 10)) {
                     for (int n = 0; n < count; n++) {
                         if (Counter.planComplete()) {
                             Buyer buyer = new Buyer(++numberBuyer);
                             buyer.start();
-                            threads.add(buyer);
+                            buyers.add(buyer);
                         }
                     }
                 }
                 time++;
-                Helper.sleepThread(1000);
 
             } else {
-                int count = Helper.random(2);
+                int count = Helper.random();
                 if (Counter.getBuyerInMarket() <= 40 + (30 - time)) {
                     for (int n = 0; n < count; n++) {
                         if (Counter.planComplete()) {
                             Buyer buyer = new Buyer(++numberBuyer);
                             buyer.start();
-                            threads.add(buyer);
+                            buyers.add(buyer);
                         }
                     }
                 }
                 time++;
-                Helper.sleepThread(1000);
             }
-            if (time == Counter.finishTime) time = 0;
+            if (time == Counter.MINUTE) time = 0;
+            Helper.sleepThread(1000);
         }
 
-        for (Thread buyer : threads) {
+
+        for (Thread buyer : buyers) {
             try {
                 buyer.join();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+
+        Counter.executorShutDown();
+
+        System.out.printf(" TOTAL AMOUNT : %.2f \n", Counter.SUM);
         System.out.println("------------shop is closed-------------");
     }
 }

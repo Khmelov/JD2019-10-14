@@ -1,76 +1,79 @@
 package by.it.kazak.jd02_02;
 
-import java.util.HashMap;
+
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicInteger;
 
 class Counter {
 
-    private static final Object monitorCounters = new Object();
-    private static final Object monitorCashiers = new Object();
+    static ExecutorService executorService = Executors.newFixedThreadPool(5);
 
-    final static int finishTime = 60;
-    static int kSpeed = 10000;
+    static final int K_SPEED = 100;
     private static final int PLAN = 100;
-    private static volatile int buyerCounter = 0;
-    private static volatile int buyerInMarket = 0;
-    private static volatile int cashiersCounter = 0;
+    private static final AtomicInteger buyerCounter = new AtomicInteger(0);
+    private static final AtomicInteger buyerInMarket = new AtomicInteger(0);
+    static final AtomicInteger cashiersCounter = new AtomicInteger(0);
 
-    static synchronized boolean marketOpened() {
-        int countCompleteBuyer = 0;
-        return buyerCounter + countCompleteBuyer < PLAN;
-    }
+    static double SUM = 0;
 
-    static HashMap<String, Double> getGoods() {
-        return products;
-    }
+
+    static final int MINUTE = 60;
+
 
     static void newBuyer() {
-        synchronized (monitorCounters) {
-            buyerCounter++;
-            buyerInMarket++;
-        }
+        buyerCounter.getAndIncrement();
+        buyerInMarket.getAndIncrement();
     }
 
     static void deleteBuyer() {
-        synchronized (monitorCounters) {
-            buyerInMarket--;
-        }
-    }
-
-    static void newCashier() {
-        synchronized (monitorCashiers) {
-            cashiersCounter++;
-        }
-    }
-
-    static void deleteCashier() {
-        synchronized (monitorCashiers) {
-            cashiersCounter--;
-        }
+        buyerInMarket.getAndDecrement();
     }
 
     static int getBuyerInMarket() {
-        return buyerInMarket;
+        return buyerInMarket.get();
     }
 
     static boolean planComplete() {
-        return buyerCounter != PLAN;
+        return buyerCounter.get() != PLAN;
     }
 
-    static HashMap<String, Double> getListOfGoods() {
-        return new HashMap<>(products);
+
+    static boolean needCashiers() {
+        boolean res;
+        res = (cashiersCounter.get() * 5 < QueueBuyer.getBuyers().size());
+        if (!res && cashiersCounter.get() == 1)
+            res = Counter.planComplete();
+        if (cashiersCounter.get() >= 5)
+            res = false;
+        return res;
     }
 
-    private static HashMap<String, Double> products = new HashMap<String, Double>() {
-        {
-            put("potato", 2.0);
-            put("milk", 4.1);
-            put("bread", 1.5);
-            put("eggs", 3.2);
-            put("bubble gum", 1.2);
-            put("rice", 1.7);
-            put("peanuts", 4.3);
-            put("water", 0.5);
+
+    private static final ConcurrentHashMap<String, Double> LIST_OF_GOODS = new ConcurrentHashMap<String, Double>() {{
+        put("Milk", 1.68);
+        put("Jam", 3.46);
+        put("Broad", 0.70);
+        put("Butter", 2.58);
+        put("Candy", 2.48);
+        put("Orange", 1.45);
+        put("Apple", 0.54);
+        put("Cheese", 3.04);
+        put("Crisp", 2.20);
+        put("Porridge", 1.50);
+
+    }};
+
+    static ConcurrentHashMap<String, Double> getListOfGoods() {
+        return LIST_OF_GOODS;
+    }
+
+    static void executorShutDown() {
+        executorService.shutdown();
+        while (!executorService.isTerminated()) {
+            Helper.sleepThread(10);
         }
-    };
+    }
 
 }
