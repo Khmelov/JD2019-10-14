@@ -32,11 +32,20 @@ class Parser{
 
     private Var oneOperation(String strLeft, String operation, String strRight) throws CalcException {
         Var right = Var.createVar(strRight);
+       if(right == null)
+            throw new CalcException("Неизвестное зн-ие" + strRight);
+
+
+
         if (operation.equals("=")) {
             Var.set(strLeft, right);
             return right;
         }
+
         Var left =  Var.createVar(strLeft);
+        if(left == null  && (!operation.equals("=")))
+            throw new CalcException("Неизвестное зн-ие" + strLeft);
+
         if (left != null && right != null) {
             switch (operation) {
                 case "+":
@@ -53,7 +62,6 @@ class Parser{
     }
 
     Var calc(String expression) throws CalcException {
-
         String[] part = expression.split(PatternForExpression.OPERATION);
         if (part.length == 1) {
             return Var.createVar(expression);

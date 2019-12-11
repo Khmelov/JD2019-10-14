@@ -57,11 +57,11 @@ abstract class Var implements Operation {
         return "abstract Var";
     }
 
-    static Var createVar(String value){
+    static Var createVar(String value) throws CalcException {
        if(value.matches(PatternForExpression.SCALAR)){
            return new Scalar(value);
        }
-       else if(value.matches(PatternForExpression.VECTOR)){
+       else if(value.replaceAll("\\\"","").matches(PatternForExpression.VECTOR)){
            return new Vector(value);
        }
        else if(value.matches(PatternForExpression.MATRIX)){
@@ -70,7 +70,7 @@ abstract class Var implements Operation {
        else if (vars.containsKey(value))
            return vars.get(value);
        else
-           return null;
+           throw new CalcException("Не удалось создать переменную");
     }
 
     static void save()  {

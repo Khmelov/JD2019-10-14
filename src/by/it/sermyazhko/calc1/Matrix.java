@@ -158,7 +158,7 @@ class Matrix extends Var{
             double[]temp =  mul(result,((Vector) other).getValue());
             return new Vector(temp);
         }
-        return super.add(other);
+        return super.mul(other);
     }
 
 

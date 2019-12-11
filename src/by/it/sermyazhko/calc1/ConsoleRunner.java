@@ -12,11 +12,11 @@ class ConsoleRunner {
         Scanner scanner = new Scanner(System.in);
         Printer printer = new Printer();
         Parser parser = new Parser();
-        Var.load();
+       // Var.load();
         for(;;){
             String str = scanner.nextLine();
             if (str.equals("end")) {
-                Var.save();
+                //Var.save();
                 break;
             }
             //System.out.println(parser.calc(str));
@@ -29,8 +29,6 @@ class ConsoleRunner {
             if(str.equals("printvar")){
                 Var.printMap();
             }
-
-
         }
 
     }
