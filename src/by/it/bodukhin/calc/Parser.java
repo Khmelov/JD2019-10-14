@@ -52,6 +52,9 @@ class Parser {
     }
 
     Var evaluate(String expression) throws CalcException {
+        while (expression.contains("(") | expression.contains(")")){
+            expression=evaluateBrackets(expression);
+        }
         String[] part = expression.split(Patterns.OPERATION);
         if(part.length == 1){
             return Var.createVar(expression);
@@ -71,5 +74,15 @@ class Parser {
             operands.add(index, result.toString());
         }
         return Var.createVar(operands.get(0));
+    }
+
+    String evaluateBrackets(String expression) throws CalcException {
+        expression=expression.replaceAll(" ","");
+        int firstBracket = expression.lastIndexOf("(");
+        int lastBracket = expression.indexOf(")");
+        String evalBracket = expression.substring(firstBracket + 1, lastBracket);
+        String resultInBracket = String.valueOf(evaluate(evalBracket));
+        expression = expression.replace(expression.substring(firstBracket, lastBracket + 1), resultInBracket);
+        return expression;
     }
 }
