@@ -1,55 +1,52 @@
 package by.it.sermyazhko.calc1;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ParserTest {
     @Test
-    public void scalarMulTest() throws Exception{
+    public void scalarMulScalarTest() throws Exception{
         Parser parser = new Parser();
         Var result = parser.calc("7.3*3.5");
         assertEquals("25.55", result.toString());
     }
 
     @Test
-    public void scalarDivTest() throws Exception{
+    public void scalarDivScalarTest() throws Exception{
         Parser parser = new Parser();
         Var result = parser.calc("7.3/2");
         assertEquals("3.65", result.toString());
     }
 
     @Test
-    public void scalarSubTest() throws Exception{
+    public void scalarSubScalarTest() throws Exception{
         Parser parser = new Parser();
         Var result = parser.calc("2-5.3");
         assertEquals("-3.3", result.toString());
     }
 
     @Test
-    public void scalarAddTest() throws Exception{
+    public void scalarAddScalarTest() throws Exception{
         Parser parser = new Parser();
-        Var result = parser.calc("C=17+2");
+        Var result = parser.calc("17+2");
         assertEquals("19.0", result.toString());
     }
 
-
     @Test
-    public void scalarThreeTest() throws Exception{
+    public void scalarAndVector() throws Exception{
         Parser parser = new Parser();
-        Var result1 = parser.calc("A=2+5.3");
-        Var result2 = parser.calc("B=A*3.5");
-        Var result = parser.calc("B1=B+0.11*-5");
-        assertEquals("25.0", result.toString());
+        Var result = parser.calc("{1,2,3}*3");
+        assertEquals("{3.0, 6.0, 9.0}",result.toString());
     }
 
-/*
     @Test
-    public void scalarDivExceptionTest() throws Exception{
+    public void scalarAndMatrix() throws Exception{
         Parser parser = new Parser();
-        Var result = parser.calc("G=10/0");
-        assertEquals("деление на 0", "деление на 0");
-    }*/
+        Var result = parser.calc("{{1,2,3},{4,5,6},{7,8,9}}*3");
+        assertEquals("{{3.0, 6.0, 9.0}, {12.0, 15.0, 18.0}, {21.0, 24.0, 27.0}}",result.toString());
+    }
 
     @Test
     public void vectorMulVectorTest() throws Exception{
@@ -72,15 +69,6 @@ public class ParserTest {
         assertEquals("{0.0, 0.0, 0.0}", result.toString());
     }
 
-    //ууточнить про ошибки обработку
-/*
-    @Test
-    public void vectorDivVectorTest() throws Exception{
-        Parser parser = new Parser();
-        Var result = parser.calc("{1,2,3}/{1,2,3}");
-        assertEquals("ERROR:Деление {1.0, 2.0, 3.0} / {1.0, 2.0, 3.0} невозможно", result.toString());
-    }*/
-
     @Test
     public void matrixMulVectorTest() throws Exception{
         Parser parser = new Parser();
@@ -102,7 +90,6 @@ public class ParserTest {
         assertEquals("{{0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}}", result.toString());
     }
 
-
     @Test
     public void printMatrixTest() throws Exception{
         Parser parser = new Parser();
@@ -123,5 +110,34 @@ public class ParserTest {
         Var result = parser.calc("A=1");
         assertEquals("1.0", result.toString());
     }
+
+
+    //ууточнить про ошибки обработку
+/*
+    @Test
+    public void vectorDivVectorTest() throws Exception{
+        Parser parser = new Parser();
+        Var result = parser.calc("{1,2,3}/{1,2,3}");
+        assertEquals("ERROR:Деление {1.0, 2.0, 3.0} / {1.0, 2.0, 3.0} невозможно", result.toString());
+    }*/
+
+
+/*
+    @Test
+    public void scalarThreeTest() throws Exception{
+        Parser parser = new Parser();
+        Var result1 = parser.calc("A=2+5.3");
+        Var result2 = parser.calc("B=A*3.5");
+        Var result = parser.calc("B1=B+0.11*-5");
+        assertEquals("25.0", result.toString());
+    }*/
+
+/*
+    @Test
+    public void scalarDivExceptionTest() throws Exception{
+        Parser parser = new Parser();
+        Var result = parser.calc("G=10/0");
+        assertEquals("деление на 0", "деление на 0");
+    }*/
 
 }
