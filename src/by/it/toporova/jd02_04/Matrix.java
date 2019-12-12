@@ -15,16 +15,18 @@ public class Matrix extends Var {
     }
 
     Matrix(String  strMatrix) {
-        String[] arr = strMatrix.replaceAll("[{ }]","").split(",");
-        value = new double[2][2];
-        for (int i = 0; i < value.length; i++) {
-            value[0][i] = Double.parseDouble(arr[i]);
+        String newStringLine = strMatrix.replaceAll("\\{", "").replaceAll(" ", "").replaceAll("},", "}");
+        String[] stringArray = newStringLine.split("}");
+        double[][] doubleArray = new double[stringArray.length][];
+
+        for (int i = 0; i < stringArray.length; i++) {
+            String[] rowStringArray = stringArray[i].split(",");
+            doubleArray[i] = new double[rowStringArray.length];
+            for (int j = 0; j < doubleArray[i].length; j++) {
+                doubleArray[i][j] = Double.parseDouble(rowStringArray[j]);
+            }
         }
-        int j = 0;
-        for (int i = 2; i < arr.length; i++) {
-            value[1][j] = Double.parseDouble(arr[i]);
-            j++;
-        }
+        value = doubleArray;
     }
 
     @Override
