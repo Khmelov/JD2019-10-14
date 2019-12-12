@@ -5,25 +5,25 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class Parser {
-    private Map<String,Integer> priority=new HashMap<String,Integer>(){
+    private Map<String, Integer> priority = new HashMap<String, Integer>() {
         {
-            this.put("=",0);
-            this.put("+",1);
-            this.put("-",1);
-            this.put("*",2);
-            this.put("/",2);
+            this.put("=", 0);
+            this.put("+", 1);
+            this.put("-", 1);
+            this.put("*", 2);
+            this.put("/", 2);
         }
     };
 
 
     private int getIndex(List<String> operators) {
-        int index=-1;
-        int prior=-1;
+        int index = -1;
+        int prior = -1;
         for (int i = 0; i < operators.size(); i++) {
             String op = operators.get(i);
-            if (priority.get(op)>prior){
-                prior=priority.get(op);
-                index=i;
+            if (priority.get(op) > prior) {
+                prior = priority.get(op);
+                index = i;
             }
         }
         return index;
@@ -32,7 +32,6 @@ class Parser {
 
     private Var oneOperation(String strLeft, String operation, String strRight) throws CalcException {
         Var right = Var.createVar(strRight);
-        //A=3 refactoring it
         if (operation.equals("=")) {
             Var.saveVar(strLeft, right);
             return right;
@@ -57,29 +56,42 @@ class Parser {
 
 
     Var evaluate(String expression) throws CalcException {
-        //222+3333+6666
+
+        expression = evaluateBrackets(expression);
         String[] part = expression.split(Patterns.OPERATION);
         if (part.length == 1) {
             return Var.createVar(expression);
         }
-        ArrayList<String> operands=new ArrayList<String>(Arrays.asList(part));
-        List<String> operators=new ArrayList<>();
+        ArrayList<String> operands = new ArrayList<String>(Arrays.asList(part));
+        List<String> operators = new ArrayList<>();
         Matcher matcher = Pattern.compile(Patterns.OPERATION).matcher(expression);
-        while (matcher.find()){
+        while (matcher.find()) {
             operators.add(matcher.group());
         }
 
-        while (operators.size()>0){
-            int index=getIndex(operators);
-            String left=operands.remove(index);
-            String rigth=operands.remove(index);
-            String op=operators.remove(index);
+        while (operators.size() > 0) {
+            int index = getIndex(operators);
+            String left = operands.remove(index);
+            String rigth = operands.remove(index);
+            String op = operators.remove(index);
             Var result = oneOperation(left, op, rigth);
-            operands.add(index,result.toString());
+            operands.add(index, result.toString());
         }
         return Var.createVar(operands.get(0));
     }
 
+    String evaluateBrackets(String expression) throws CalcException {
+        expression = expression.replaceAll(" ", "");
+        while (expression.contains("(") | expression.contains(")")) {
+            int firstBracket = expression.lastIndexOf("(");
+            int lastBracket = expression.indexOf(")");
+            String evalBracket = expression.substring(firstBracket + 1, lastBracket);
+            String resultInBracket = String.valueOf(evaluate(evalBracket));
+            expression = expression.replace(expression.substring(firstBracket, lastBracket + 1), resultInBracket);
+            evaluateBrackets(expression);
+        }
+        return expression;
+    }
 }
 
 
