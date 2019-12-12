@@ -17,7 +17,7 @@ class Basket {
         goodsMap.put("bread", 1.38);
     }
 
-    
+
     Basket() {
         goodsInBasket = new HashMap<>();
         int goodsNumber = Util.randomFromTo(1, goodsMap.size());
