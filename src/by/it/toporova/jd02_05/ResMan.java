@@ -1,5 +1,8 @@
 package by.it.toporova.jd02_05;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -12,27 +15,29 @@ public enum ResMan {
 
     private Locale locale;
 
-    ResMan()
-    {
+
+    ResMan(){
         setLocale(Locale.getDefault());
     }
 
-    void setLocale(Locale locale){
-        this.locale=locale;
-        rb=ResourceBundle.getBundle(path,this.locale);
+    public Locale getLocale() {
+        return locale;
     }
 
+    public void setLocale(Locale locale) {
+        this.locale = locale;
+        rb=ResourceBundle.getBundle(path,locale);
+    }
 
-    void setLocale(String language){
+    public void setLocale(String language) {
         setLocale(new Locale(language));
     }
 
-    void setLocale(String language, String country){
-        setLocale(new Locale(language, country));
+    public void setLocale(String language, String country) {
+        setLocale(new Locale(language,country));
     }
 
-    String get(String key){
+    public String get(String key){
         return rb.getString(key);
     }
-
 }

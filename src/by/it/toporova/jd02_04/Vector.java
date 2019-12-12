@@ -59,7 +59,7 @@ class Vector extends Var {
         if (other.toString().matches(Patterns.SCALAR)) {
             double[] res = Arrays.copyOf(value, value.length);
             for (int i = 0; i < res.length; i++) {//вычитаем каждый элемент матрицы со скаляром
-                res[i] = res[i] - ((Scalar) other).getValue();
+                res[i] = -((Scalar) other).getValue() + res[i];
 
             }
             return new Vector(res);
@@ -90,6 +90,7 @@ class Vector extends Var {
 
             }
             return new Scalar(result);
+
         } else return super.mul(other);
 
     }

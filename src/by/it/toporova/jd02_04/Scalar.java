@@ -2,6 +2,7 @@ package by.it.toporova.jd02_04;
 
 class Scalar extends Var {
     private double value;
+    static final Scalar MINUS = new Scalar(-1);
 
     public double getValue() {
         return value;

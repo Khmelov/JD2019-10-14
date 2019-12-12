@@ -1,76 +1,69 @@
 package by.it.toporova.jd02_05;
 
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.Locale;
 
 public class Runner {
 
-    public static void main(String[] args) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        ResMan lang= ResMan.INSTANCE;
-        DateFormat df;
-        LABEL:
-        while (true) {
-            String language = reader.readLine();
-            switch (language) {
-                case "ru":
-                   lang.setLocale(Language.RU, Country.RU);
-                    df = DateFormat.getDateInstance(
-                            DateFormat.LONG, new Locale(Language.RU, Country.RU));
-                    break LABEL;
-                case "en":
-                    lang.setLocale(Language.EN, Country.US);
-                    df = DateFormat.getDateInstance(
-                            DateFormat.LONG, Locale.US);
-                    break LABEL;
-                case "be":
-                    lang.setLocale(Language.BE, Country.BY);
-                    df = DateFormat.getDateInstance(
-                            DateFormat.LONG, new Locale(Language.BE, Country.BY));
-                    break LABEL;
-                default:
-                    System.err.println(Systems.INCORRECT_INPUT);
+        public static void main(String[] args) throws IOException {
+
+            ResMan resMan = ResMan.INSTANCE;
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            if (args.length == 2) {
+                resMan.setLocale(args[0], args[1]);
+            }
+            System.out.println(resMan.get(Systems.TO_START));
+            String input = reader.readLine();
+            if (input.equalsIgnoreCase(Language.EN)) {
+                resMan.setLocale(Language.EN, Country.US);
+                printMessage(resMan);
+                instructionToFinish(resMan);
+            } else if (input.equalsIgnoreCase(Language.RU)) {
+                resMan.setLocale(Language.RU, Country.RU);
+                printMessage(resMan);
+                instructionToFinish(resMan);
+            } else if (input.equalsIgnoreCase(Language.BE)) {
+                resMan.setLocale(Language.BE, Country.BY);
+                printMessage(resMan);
+                instructionToFinish(resMan);
+            } else {
+                System.out.println(resMan.get(Systems.INCORRECT_INPUT));
+                instructionToFinish(resMan);
             }
 
-
-
-        }
-        Date date = new Date(System.currentTimeMillis());
-        output(lang, df, date);
-      //  createCommandsFile();
-    }
-
-  /*  private static void createCommandsFile() {
-        String path = GetPath.getPath(Runner.class);
-        File f = new File(path);
-        File[] files = f.listFiles();
-        if (files != null)
-            try (PrintWriter writer = new PrintWriter(new FileWriter(path + "commands.txt"))) {
-                for (File file : files) {
-                    if (file.getName().contains(".txt")) {
-                        String name = file.getName().replace(".txt", ".properties");
-                        writer.printf("native2ascii -encoding utf-8 %s %s\n", file.getName(), name);
-                    }
+            while (!(input = reader.readLine()).equalsIgnoreCase(Systems.END)) {
+                if (input.equalsIgnoreCase(Language.EN)) {
+                    resMan.setLocale(Language.EN, Country.US);
+                    printMessage(resMan);
+                } else if (input.equalsIgnoreCase(Language.RU)) {
+                    resMan.setLocale(Language.RU, Country.RU);
+                    printMessage(resMan);
+                } else if (input.equalsIgnoreCase(Language.BE)) {
+                    resMan.setLocale(Language.BE, Country.BY);
+                    printMessage(resMan);
+                } else {
+                    System.out.println(resMan.get(Systems.INCORRECT_INPUT));
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-    }*/
+        }
 
+        private static void instructionToFinish(ResMan resMan) {
+            System.out.println();
+            System.out.println(resMan.get(Systems.TO_FINISH));
+        }
 
+        private static void printMessage(ResMan resMan) {
+            System.out.println(resMan.get(Messages.WELCOME));
+            System.out.println(resMan.get(Messages.QUESTION));
+            System.out.println(resMan.get(User.FIRST_NAME));
+            System.out.println(resMan.get(User.LAST_NAME));
 
-    private static void output(ResMan lang, DateFormat df, Date date) {
-        System.out.println(df.format(date));
-        System.out.println(lang.get(Messages.WELCOME));
-        System.out.println(lang.get(Messages.QUESTION));
-        System.out.printf("%s %s\n",
-                lang.get(User.FIRST_NAME),
-                lang.get(User.LAST_NAME));
-
-
+            DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG, resMan.getLocale());
+            System.out.println(dateFormat.format(new Date()));
+            System.out.println();
+        }
     }
-
-}

@@ -38,14 +38,30 @@ public class ScalarTest {
     }
 
     @Test
-    public void matrixTest() throws Exception {
+    public void scalarTestB1() throws Exception {
         Parser parser = new Parser();
-        Var actual = parser.evaluate("{{2,4,6},{1,2,3}}*{{2,3},{2,3},{2,3}}");
-        assertEquals("Mul matrix error", "{{24.0, 36.0}, {12.0, 18.0}}",actual.toString());
-        actual = parser.evaluate("{{2,4,6},{1,2,3}}-{{2,3,2},{3,2,3}}");
-        assertEquals("Sub matrix error", "{{0.0, 1.0, 4.0}, {-2.0, 0.0, 0.0}}",actual.toString());
-        actual= parser.evaluate("{{2,4,6},{1,2,3}}+{{2,3,2},{3,2,3}}");
-        assertEquals("Sum matrix error", "{{4.0, 7.0, 8.0}, {4.0, 4.0, 6.0}}",actual.toString());
+        Var actual = parser.evaluate("C=B+(A*2)");
+        assertEquals("Mul vector error", "40.15",actual.toString());
+
     }
+
+    @Test
+    public void scalarTestB2() throws Exception {
+        Parser parser = new Parser();
+        Var actual = parser.evaluate("D=((C-0.15)-20)/(7-5)");
+        assertEquals("Sub vector error", "10",actual.toString());
+
+    }
+
+    @Test
+    public void scalarTestB3() throws Exception {
+        Parser parser = new Parser();
+        Var actual = parser.evaluate("E={2,3}*(D/2)");
+        assertEquals("Sum vector error", "{10,15}",actual.toString());
+
+    }
+
+
+
 
 }
