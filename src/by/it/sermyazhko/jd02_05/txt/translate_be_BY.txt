@@ -1,0 +1,4 @@
+message.welcome=Прывiтанне!
+message.question=Як справы?
+user.firstname=Дар'я
+user.lastname=Сярмяжка
