@@ -14,7 +14,7 @@ public enum ResMan {
 
     ResMan()
     {
-        setLocale("en", "US");
+        setLocale(Locale.getDefault());
     }
 
     void setLocale(Locale locale){
