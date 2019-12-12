@@ -1,0 +1,6 @@
+//messages
+message.welcome=Прывiтанне!
+message.info=каб памяняць мову набярыце ru be en. end = закрыць праграму
+//user info
+user.firstname=Андрэй
+user.lastname=Харытоненка
