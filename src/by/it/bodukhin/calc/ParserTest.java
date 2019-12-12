@@ -19,11 +19,11 @@ public class ParserTest {
         assertEquals("Div scalar error", "4.0", actual.toString());
     }
 
-    //@Test
+    @Test
     public void vectorTest() throws Exception {
         Parser parser = new Parser();
         Var actual = parser.evaluate("{2,4,6}*{1,2,3}");
-        assertEquals("Mul vector error", "{2.0, 8.0, 18.0}",actual.toString());
+        assertEquals("Mul vector error", "28.0",actual.toString());
         actual = parser.evaluate("{2,4,6}-{1,2,3}");
         assertEquals("Sub vector error", "{1.0, 2.0, 3.0}",actual.toString());
         actual= parser.evaluate("{2,4,6}+{1,2,3}");
