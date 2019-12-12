@@ -1,4 +1,4 @@
-package by.it.yurtsevich.jd02_01;
+package by.it.yurtsevich.jd02_02;
 
 import java.util.*;
 
