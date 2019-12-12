@@ -10,6 +10,10 @@ public enum ResMan {
 
     private ResourceBundle rb;
 
+    public Locale getLocale() {
+        return locale;
+    }
+
     private Locale locale;
 
     ResMan() {
@@ -20,6 +24,8 @@ public enum ResMan {
         this.locale = locale;
         rb = ResourceBundle.getBundle(path,this.locale);
     }
+
+
 
     String get(String key){
         return rb.getString(key);

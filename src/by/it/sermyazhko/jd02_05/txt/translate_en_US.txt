@@ -2,3 +2,5 @@ message.welcome=Hello!
 message.question=How are you?
 user.firstname=Dasha
 user.lastname=Sermiazhko
+data.now = current date
+format.full = yyyy-MMMM-dd HH:mm:ss
