@@ -1,8 +1,8 @@
 package by.it.kharitonenko.calc;
 
 public class CalcException extends Exception {
-
     public CalcException() {
+        super();
     }
 
     public CalcException(String message) {

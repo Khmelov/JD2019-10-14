@@ -31,7 +31,6 @@ public class Cashier implements Runnable {
                 }
             } else {
 //                //closing cashier
-//                //TODO deadlock
 //                CashierObserver.freeSpace();
 //                lock.lock();
 //                while (!CashierObserver.freeCashiers()) {

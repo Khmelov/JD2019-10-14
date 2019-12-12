@@ -18,7 +18,6 @@ public class CashierObserver {
     }
 
     //checking buyer queue size
-    //TODO cashiers working free space etc
     public synchronized static void buyerQueueCheck() {
         allowedCashiers = BuyerQueue.getQueueSize() / 5 + 1;
         if (allowedCashiers > 5) {
