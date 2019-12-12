@@ -1,9 +1,5 @@
 package by.it.bodukhin.jd02_05;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
