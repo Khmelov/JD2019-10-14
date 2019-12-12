@@ -18,4 +18,7 @@ public class Dispacther {
     static int getBuyerInMarket() {
         return buyerInMarket;
     }
+
+    public static boolean marketClosed() {return marketClosed();
+    }
 }
