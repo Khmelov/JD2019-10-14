@@ -1,40 +1,23 @@
 package by.it.komarov.jd01_10;
 
-import by.it.komarov.Param;
-
-import java.lang.reflect.Method;
-
 public class Bean {
 
-    @Param(a = 10, b = 15)
-    double sum(int left, int right){
-        return left + right;
+    public double sum(int a, int b){
+        return a + b;
     }
 
-    @Param(a = 10, b = 15)
-    static double max(int left, int right){
-        return left<right?right:left;
+    @Param(a = 4, b = 6)
+    public double avg(int a, int b){
+        return (a + b) / 2.0;
     }
 
-    @Param(a = 10, b = 15)
-    static double min(int left, int right){
-        return left>right?right:left;
+    @Param(a = 8, b = 4)
+    public static double min(int a, int b){
+        return Math.min(a, b); // a < b ? a : b
     }
 
-    @Param(a = 10, b = 15)
-    double avg(int left, int right){
-        return (left + right)/2.0;
+    @Param(a = 3, b = 4)
+    public static double max(int a, int b){
+        return Math.max(a, b); // a > b ? a : b
     }
-
-    // modifaer&1 == 00000001
-    public static void main(String[] args) {
-
-        Class<Bean> beanClass = Bean.class;
-        Method[] declaredMethods = beanClass.getDeclaredMethods();
-        for (Method method : declaredMethods) {
-            System.out.println(method);
-        }
-
-    }
-
 }
