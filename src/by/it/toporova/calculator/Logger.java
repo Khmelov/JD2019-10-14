@@ -1,4 +1,4 @@
-package by.it.toporova.jd02_06;
+package by.it.toporova.calculator;
 
 import java.io.File;
 import java.io.FileWriter;
