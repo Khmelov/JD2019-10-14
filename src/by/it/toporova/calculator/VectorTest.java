@@ -1,4 +1,4 @@
-package by.it.toporova.jd02_04;
+package by.it.toporova.calculator;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
