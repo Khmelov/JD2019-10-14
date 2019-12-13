@@ -1,46 +1,47 @@
 package by.it.toporova.calculator;
-
-import java.io.File;
+import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.Date;
+
 
 class Logger {
+    private static volatile Logger instance;
 
-    private static volatile Logger instanse;
+    private static String filename;
 
     private Logger() {
+        filename = System.getProperty("user.dir") +
+                "/src/by/it/toporova/calculator/log.txt";
     }
 
-    static Logger get() {
-
-        if (instanse == null) {
-            synchronized (Logger.class) {
-                if (instanse == null)
-                    instanse = new Logger();
+    static Logger getLogger() {
+        if(instance==null){
+            synchronized (Logger.class){
+                if (instance==null)
+                    instance = new Logger();
             }
-
         }
-        return instanse;
+        return instance;
     }
 
-    private String filename = getPath(Logger.class) + "log.txt";
-
-    void log(String text) {
-        try (PrintWriter out = new PrintWriter(new FileWriter(filename, true))) {
-            out.append(text).append("\n");
-        } catch (IOException e) {
-            System.out.println("What?");
+    void toLog(String logLine) {
+        Date date = new Date();
+        String message = String
+                .format("%s %s\n", date.toString(), logLine);
+        synchronized (Logger.class) {
+            try (
+                    BufferedWriter out =
+                            new BufferedWriter(
+                                    new FileWriter(filename, true)
+                            )
+            ) {
+                out.write(message);
+                out.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-    }
-
-    private static String getPath(Class<?> aClass) {
-        return System.getProperty("user.dir")
-                + File.separator + "src" + File.separator +
-                aClass
-                        .getName()
-                        .replace(aClass.getSimpleName(), "")
-                        .replace(".", File.separator);
     }
 
 
