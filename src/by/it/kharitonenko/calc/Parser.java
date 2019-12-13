@@ -70,7 +70,7 @@ public class Parser {
             }
 
         }
-        throw new CalcException("неизвестная ошибка.");
+        throw new CalcException(ConsoleRunner.lang.get(errorMessages.UNKNOWN));
     }
 
 
@@ -87,7 +87,6 @@ public class Parser {
                 expression = expression.replace(expression.substring(start, end), result.toString());
             }
         }
-        //222+3333+6666
         String[] part = expression.split(IPatterns.OPERATION);
         if (part.length == 1) {
             return Var.createVar(expression);
@@ -98,7 +97,6 @@ public class Parser {
         while (matcher.find()) {
             operators.add(matcher.group());
         }
-
         while (operators.size() > 0) {
             int index = getIndex(operators);
             String left = operands.remove(index);

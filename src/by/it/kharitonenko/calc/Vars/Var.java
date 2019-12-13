@@ -1,9 +1,7 @@
 package by.it.kharitonenko.calc.Vars;
 
-import by.it.kharitonenko.calc.CalcException;
-import by.it.kharitonenko.calc.ConsoleRunner;
+import by.it.kharitonenko.calc.*;
 import by.it.kharitonenko.calc.Interfaces.*;
-import by.it.kharitonenko.calc.Parser;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +43,7 @@ public abstract class Var implements IVar, IAdd, ISub, IMul, IDiv, IPatterns {
         else if (vars.containsKey(strVar))
             return vars.get(strVar);
         else
-            throw new CalcException("Не удалось создать переменную");
+            throw new CalcException(ConsoleRunner.lang.get(errorMessages.INIT));
     }
 
     public static void save() {
@@ -54,7 +52,7 @@ public abstract class Var implements IVar, IAdd, ISub, IMul, IDiv, IPatterns {
                 writer.printf("%s=%s\n", pair.getKey(), pair.getValue().toString());
             }
         } catch (IOException e) {
-            System.out.println("ошибка файла.");
+            System.out.println(ConsoleRunner.lang.get(errorMessages.FILE));
         }
     }
 
@@ -67,7 +65,7 @@ public abstract class Var implements IVar, IAdd, ISub, IMul, IDiv, IPatterns {
                 parser.evaluate(line);
             }
         } catch (IOException | CalcException e) {
-            System.out.println("ошибка файла.");
+            System.out.println(ConsoleRunner.lang.get(errorMessages.FILE));
         }
     }
 
@@ -82,21 +80,21 @@ public abstract class Var implements IVar, IAdd, ISub, IMul, IDiv, IPatterns {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException("ошибка сложения.");
+        throw new CalcException(ConsoleRunner.lang.get(errorMessages.ADDITION));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException("ошибка деления.");
+        throw new CalcException(ConsoleRunner.lang.get(errorMessages.DIVISION));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException("ошибка умножения.");
+        throw new CalcException(ConsoleRunner.lang.get(errorMessages.MULTIPLICATION));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException("ошибка вычитания.");
+        throw new CalcException(ConsoleRunner.lang.get(errorMessages.SUBTRACTION));
     }
 }

@@ -19,7 +19,6 @@ public class Tests {
         assertEquals("ERROR: ", "40.15", parser.evaluate("C=B+(A*2)").toString());
         assertEquals("ERROR: ", "10.0", parser.evaluate("D=((C-0.15)-20)/(7-5)").toString());
         assertEquals("ERROR: ", "{10.0,15.0}", parser.evaluate("E={2,3}*(D/2)").toString());
-        System.out.println("Tests for Task A and TaskB (brackets) done!");
     }
 
     @Test
@@ -29,7 +28,6 @@ public class Tests {
         assertEquals("ERROR: ", "0.0", parser.evaluate("1-1").toString());
         assertEquals("ERROR: ", "6.0", parser.evaluate("2*3").toString());
         assertEquals("ERROR: ", "2.0", parser.evaluate("4/2").toString());
-        System.out.println("Scalar tests for TaskA done!");
     }
 
     @Test
@@ -39,7 +37,6 @@ public class Tests {
         assertEquals("ERROR: ", "{-1.0,0.0}", parser.evaluate("{1,1}-{2,1}").toString());
         assertEquals("ERROR: ", "{6.0,3.0,9.0}", parser.evaluate("{2,1,3}*3").toString());
         assertEquals("ERROR: ", "{3.0,1.0,1.0}", parser.evaluate("{9,3,3}/3").toString());
-        System.out.println("Vector tests for TaskB done!");
     }
 
     @Test
@@ -51,7 +48,6 @@ public class Tests {
         assertEquals("ERROR: ", "{{0.5,0.5},{1.0,1.0}}", parser.evaluate("{{1,1},{2,2}}/2").toString());
         assertEquals("ERROR: ", "{{2.0,2.0},{4.0,4.0}}", parser.evaluate("{{1,1},{2,2}}+{{1,1},{2,2}}").toString());
         assertEquals("ERROR: ", "{2.0,4.0}", parser.evaluate("{{1,1},{2,2}}*{2,2}").toString());
-        System.out.println("Matrix tests for TaskC done!");
     }
 
     @Test
@@ -62,6 +58,5 @@ public class Tests {
         assertEquals("ERROR: ", "{2.0,4.0,1.0}", testVarV.toString());
         VarM testVarM = new VarM("{{2,4,1},{3,1,1}");
         assertEquals("ERROR: ", "{{2.0,4.0,1.0},{3.0,1.0,1.0}}", testVarM.toString());
-        System.out.println("Var constructor and toString methods test done!");
     }
 }

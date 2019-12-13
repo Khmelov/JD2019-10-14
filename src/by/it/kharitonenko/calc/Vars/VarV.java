@@ -15,13 +15,12 @@ public class VarV extends Var implements IVar, IAdd, ISub, IMul, IDiv {
     }
 
     public VarV(String stringVarV) {
-        StringBuilder sb = new StringBuilder(stringVarV);
-        String str = sb.toString().trim();
+        String str = stringVarV.replaceAll(" ", "").trim();
         str = str.replace("{", "").replaceAll("\\s", "");
         String[] arrayString = str.split("[^\\d.-]+");
         VarS[] varS = new VarS[arrayString.length];
         for (int i = 0; i < arrayString.length; i++) {
-            varS[i] = new VarS(arrayString[i]);
+            varS[i] = new VarS(arrayString[i].trim());
         }
         this.value = varS;
     }
