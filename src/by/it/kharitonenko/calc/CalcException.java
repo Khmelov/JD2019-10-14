@@ -7,6 +7,7 @@ public class CalcException extends Exception {
 
     public CalcException(String message) {
         super(message);
+        ConsoleRunner.logger.log(message);
     }
 
     public CalcException(String message, Throwable cause) {

@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class ConsoleRunner {
     public static ResManager lang = ResManager.INSTANCE;
+    public static Logger logger = Logger.createLogger();
 
     static {
         lang.setLocale(Locale.getDefault());
