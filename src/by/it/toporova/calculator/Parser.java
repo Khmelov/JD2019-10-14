@@ -55,7 +55,7 @@ class Parser {
     }
 
 
-    Var evaluate(String expression) throws CalcException {
+  Var evaluate(String expression) throws CalcException {
 
         expression = evaluateBrackets(expression);
         String[] part = expression.split(Patterns.OPERATION);
@@ -80,7 +80,7 @@ class Parser {
         return Var.createVar(operands.get(0));
     }
 
-    String evaluateBrackets(String expression) throws CalcException {
+    private String evaluateBrackets(String expression) throws CalcException {
         expression = expression.replaceAll(" ", "");
         while (expression.contains("(") | expression.contains(")")) {
             int firstBracket = expression.lastIndexOf("(");
