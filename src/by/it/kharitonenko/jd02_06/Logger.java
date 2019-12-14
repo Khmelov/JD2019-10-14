@@ -10,7 +10,7 @@ import java.util.Date;
 public class Logger {
     private static volatile Logger instance;
     private String filename = getPath(Logger.class) + "log.txt";
-    DateFormat df = DateFormat.getDateInstance(DateFormat.MEDIUM);
+
     private Logger() {
     }
 
