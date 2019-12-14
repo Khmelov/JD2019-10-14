@@ -80,7 +80,7 @@ class Parser {
         return Var.createVar(operands.get(0));
     }
 
-    private String evaluateBrackets(String expression) throws CalcException {
+     String evaluateBrackets(String expression) throws CalcException {
         expression = expression.replaceAll(" ", "");
         while (expression.contains("(") | expression.contains(")")) {
             int firstBracket = expression.lastIndexOf("(");
