@@ -1,4 +1,4 @@
-package by.it.zimina.calc;
+package by.it.zimina.calc_factory;
 
 public class CalcException extends Exception {
     public CalcException() {

@@ -1,4 +1,4 @@
-package by.it.zimina.calc;
+package by.it.zimina.calc_old;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

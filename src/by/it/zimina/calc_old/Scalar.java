@@ -1,6 +1,4 @@
-package by.it.zimina.calc;
-
-import by.it._examples_.jd01_11.Generics.Demo;
+package by.it.zimina.calc_old;
 
 class Scalar extends Var {
 

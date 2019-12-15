@@ -1,4 +1,4 @@
-package by.it.zimina.calc;
+package by.it.zimina.calc_factory;
 
 interface Operation {
 Var add(Var other) throws CalcException;

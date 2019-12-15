@@ -1,6 +1,6 @@
-package by.it.zimina.calc;
+package by.it.zimina.calc_factory;
 
-public class Runner {
+public class Log_Runner {
     public static void main(String[] args) {
 
         Logger.get().log("Hi!"+ " " + Logger.timeFormat());
