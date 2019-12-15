@@ -1,7 +1,5 @@
 package by.it.akhmelev.jd02_06;
 
-import by.it.akhmelev.jd01_14.TaskA;
-
 import java.io.*;
 
 class Logger {
