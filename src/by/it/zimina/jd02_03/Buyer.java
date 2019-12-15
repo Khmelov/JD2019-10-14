@@ -1,107 +1,62 @@
 package by.it.zimina.jd02_03;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Semaphore;
+class Buyer extends Thread implements IBuyer {
 
-class Buyer extends Thread implements IBuyer, IUseBacket {
+    private boolean waitFlag = false;
 
-    List<String> goodsInBacket = new ArrayList<>();
+    public void setWaitFlag(boolean waitFlag) {
+        this.waitFlag = waitFlag;
+    }
 
-    Semaphore sem = new Semaphore(20);
-
-    private boolean pensioneer = false;
-
-    public Buyer(int number) {
-        super("Buyer #"+ number);
-        if(number % 4 == 0) this.pensioneer=true;
+    Buyer(int number) {
+        super("Buyer №" + number);
+        Dispatcher.buyerInMarket();
     }
 
     @Override
     public void run() {
         enterToMarket();
-        takeBacket();
         chooseGoods();
-        putGoodsToBacket();
-        getToQueue();
+        goToQueue();
         goOut();
+        Dispatcher.buyerLeaveMarket();
     }
 
     @Override
     public void enterToMarket() {
-        System.out.println(this+" came to market");
-
+        System.out.println(this + " come to market");
     }
 
     @Override
     public void chooseGoods() {
-        try {
-            sem.acquire();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        System.out.println(this+" started to choose goods");
-        if(pensioneer) Helper.sleep(Helper.random(750, 3000));
-        int timeout = Helper.random(500,2000);
+        System.out.println(this + " started to choose goods");
+        int timeout = Helper.random(500, 2000);
         Helper.sleep(timeout);
-
+        System.out.println(this + " finished to choose goods");
     }
 
     @Override
-    public void getToQueue() {
+    public void goToQueue() {
         QueueBuyer.add(this);
-        synchronized (this){
+        waitFlag = true;
+        synchronized (this) {
             try {
-                wait();
+                while (waitFlag)
+                    this.wait();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                throw new RuntimeException(e);
             }
         }
-        System.out.println(this+" service finished");
     }
+
 
     @Override
     public void goOut() {
-        System.out.println(this+" leave the market");
-        Dispatcher.countCompeteBuyers.getAndIncrement();
-
+        System.out.println(this + " leave the market");
     }
 
     @Override
     public String toString() {
         return getName();
-    }
-
-    @Override
-    public void takeBacket() {
-        System.out.println(this+" took backet");
-    }
-
-    private Double totalPrice;
-
-    public Double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Double totalPrice) {
-        this.totalPrice=totalPrice;
-    }
-
-    @Override
-    public void putGoodsToBacket() {
-        System.out.println(this+" finished to choose goods");
-        sem.release();
-        double price = 0;
-        int countOfGoods = Helper.random(1, 4);
-        int timeToPut = Helper.random(500, 2000);
-        if(pensioneer) timeToPut = Helper.random(750,3000);
-        for (int i = 0; i <countOfGoods ; i++) {
-            Good good = Goods.getRandomGood();
-            goodsInBacket.add(good+" for " + good.getPrice()+"$");
-            price+=good.getPrice();
-            System.out.println(this + " put to the basket " + good);
-            Helper.sleep(timeToPut);
-        }
-        setTotalPrice(price);
     }
 }

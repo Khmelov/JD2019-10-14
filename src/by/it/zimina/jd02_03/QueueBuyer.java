@@ -1,25 +1,22 @@
 package by.it.zimina.jd02_03;
 
-
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.TimeUnit;
 
-public class  QueueBuyer {
+class QueueBuyer {
 
     private final static BlockingDeque<Buyer> queue = new LinkedBlockingDeque<>(30);
 
-    static void add(Buyer buyer){
+    static void add(Buyer buyer) {
         try {
             queue.putLast(buyer);
-            System.out.println(buyer+" joined to queue");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
-
     }
 
-    static Buyer extractBuyer() {
+    static Buyer poll() {
         try {
             return queue.pollFirst(1, TimeUnit.MILLISECONDS);
         } catch (InterruptedException e) {
@@ -27,7 +24,5 @@ public class  QueueBuyer {
         }
     }
 
-    static int getCount(){
-            return queue.size();
-    }
+
 }

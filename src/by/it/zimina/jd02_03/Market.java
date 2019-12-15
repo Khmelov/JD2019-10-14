@@ -1,30 +1,38 @@
 package by.it.zimina.jd02_03;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class Market {
 
     public static void main(String[] args) throws InterruptedException {
-        List<Thread> buyerList = new ArrayList<>();
         System.out.println("Market opened");
-        new Dispatcher().start();
-        while (Dispatcher.countBuyer.get() < Dispatcher.PLAN) {
+
+        ExecutorService threadPool = Executors.newFixedThreadPool(5);
+
+        for (int i = 1; i <= 2; i++) {
+            Cashier cashier = new Cashier(i);
+            threadPool.execute(cashier);
+        }
+
+
+        int numberBuyer = 0;
+        while (Dispatcher.marketOpened()) {
             int currentCount = Helper.random(2);
-                for (int j = 0; j <= currentCount; j++) {
-                    if (Dispatcher.countBuyer.get() == Dispatcher.PLAN) {
-                        break;
-                    }
-                    Buyer buyer = new Buyer(Dispatcher.countBuyer.incrementAndGet());
-                    buyerList.add(buyer);
+            for (int i = 0; i <= currentCount; i++) {
+                if (Dispatcher.marketOpened()) {
+                    Buyer buyer = new Buyer(++numberBuyer);
                     buyer.start();
                 }
+            }
             Helper.sleep(1000);
         }
-        for(Thread buyer : buyerList){
-            buyer.join();
-        }
+
+        threadPool.shutdown();
+        //noinspection StatementWithEmptyBody
+        while (!threadPool.awaitTermination(1, TimeUnit.MILLISECONDS));
         System.out.println("Market closed");
     }
-}
 
+}

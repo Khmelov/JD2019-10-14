@@ -1,32 +1,31 @@
 package by.it.zimina.jd02_03;
 
-import by.it.akhmelev.jd02_03.Cashier;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Dispatcher extends Thread {
-    static final int PLAN = 100;
-    private final static AtomicInteger numberOfCashier = new AtomicInteger(1);
-    final static AtomicInteger countBuyer = new AtomicInteger(0);
-    final static AtomicInteger countCompeteBuyers = new AtomicInteger(0);
-    static int kSpeed = 1000;
-    ExecutorService threadPool = Executors.newFixedThreadPool(5);
+class Dispatcher {
+    static int kSpeed=1000;
 
-    @Override
-    public void run() {
-        while (countCompeteBuyers.get() < PLAN) {
-                for (int i =numberOfCashier.get(); i <= 5; i++) {
-                    if (QueueBuyer.getCount() > (numberOfCashier.get()*5)) {
-                    Cashier cashier = new Cashier(i);
-                    threadPool.execute(cashier);
-                    numberOfCashier.getAndIncrement();
-                }
-            }
-            Helper.sleep(1000);
-        }
-        //threadPool.shutdown();
+    private static final int PLAN=100;
+    private final static AtomicInteger countBuyer=new AtomicInteger(0);
+    private final static AtomicInteger countCompleteBuyer=new AtomicInteger(0);
+
+    static void buyerInMarket(){
+        countBuyer.getAndIncrement();
     }
-}
 
+    static void buyerLeaveMarket(){
+        countBuyer.getAndDecrement();
+        countCompleteBuyer.getAndIncrement();
+    }
+
+    static boolean marketOpened(){
+        return countBuyer.get()+countCompleteBuyer.get()<PLAN;
+    }
+
+    static boolean marketClosed(){
+        return countCompleteBuyer.get()==PLAN;
+    }
+
+
+
+}
