@@ -8,7 +8,7 @@ public enum ResMan {
 
     INSTANCE;
 
-    private final String RESOURSE = "by.it.toporova.calculator_jd02_06.lang.messages";
+    private final String RESOURSE = "by.it.toporova.calculator_jd02_05_and_jd02_06.lang.messages";
     private Locale locale;
     private ResourceBundle resourceBundle;
 
