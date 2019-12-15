@@ -16,7 +16,6 @@ class Parser{
         }
     };
 
-
     private int getIndex(List<String> operators) {
         int index=-1;
         int prior=-1;
@@ -33,7 +32,7 @@ class Parser{
     private Var oneOperation(String strLeft, String operation, String strRight) throws CalcException {
         Var right = Var.createVar(strRight);
        if(right == null)
-            throw new CalcException("Неизвестное зн-ие" + strRight);
+            throw new CalcException(ResMan.INSTANCE.get(Messages.PARSER_CALCEXCEPTOPTION) + strRight);
 
 
 
@@ -44,7 +43,7 @@ class Parser{
 
         Var left =  Var.createVar(strLeft);
         if(left == null  && (!operation.equals("=")))
-            throw new CalcException("Неизвестное зн-ие" + strLeft);
+            throw new CalcException(ResMan.INSTANCE.get(Messages.PARSER_CALCEXCEPTOPTION) + strLeft);
 
         if (left != null && right != null) {
             switch (operation) {
@@ -58,7 +57,7 @@ class Parser{
                     return left.div(right);
             }
         }
-        throw new CalcException("Не должны сюда попасть");
+        throw new CalcException(ResMan.INSTANCE.get(Messages.PARSER_CALCEXCEPTOPTIONGET));
     }
 
     Var calc(String expression) throws CalcException {

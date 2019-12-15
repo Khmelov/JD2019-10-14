@@ -111,33 +111,4 @@ public class ParserTest {
         assertEquals("1.0", result.toString());
     }
 
-
-    //ууточнить про ошибки обработку
-/*
-    @Test
-    public void vectorDivVectorTest() throws Exception{
-        Parser parser = new Parser();
-        Var result = parser.calc("{1,2,3}/{1,2,3}");
-        assertEquals("ERROR:Деление {1.0, 2.0, 3.0} / {1.0, 2.0, 3.0} невозможно", result.toString());
-    }*/
-
-
-/*
-    @Test
-    public void scalarThreeTest() throws Exception{
-        Parser parser = new Parser();
-        Var result1 = parser.calc("A=2+5.3");
-        Var result2 = parser.calc("B=A*3.5");
-        Var result = parser.calc("B1=B+0.11*-5");
-        assertEquals("25.0", result.toString());
-    }*/
-
-/*
-    @Test
-    public void scalarDivExceptionTest() throws Exception{
-        Parser parser = new Parser();
-        Var result = parser.calc("G=10/0");
-        assertEquals("деление на 0", "деление на 0");
-    }*/
-
 }
