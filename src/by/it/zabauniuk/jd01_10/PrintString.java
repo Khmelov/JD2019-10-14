@@ -5,16 +5,15 @@ import java.lang.reflect.Modifier;
 
 public class PrintString {
     public static void main(String[] args) {
-        Class<String> stringStructure = String.class;
-        Method[] methods = stringStructure.getDeclaredMethods();
-        for (Method method : methods) {
-            int modifiers = method.getModifiers();
-            if (!Modifier.isStatic(modifiers)) {
-                String name = method.getName();
-                System.out.println(name);
+
+        Class<String> strClass = String.class;
+        Method[] strMethod = strClass.getDeclaredMethods();
+
+        for (Method method : strMethod) {
+            if ((method.getModifiers() & Modifier.STATIC) != Modifier.STATIC) {
+                System.out.println(method.getName());
             }
         }
+
     }
-
-
 }
