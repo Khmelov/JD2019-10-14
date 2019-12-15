@@ -20,21 +20,18 @@ public class Matrix extends Var {
     }
 
     Matrix(String strMatrix) {
-        StringBuilder sb;
-        sb = new StringBuilder(strMatrix.replaceAll("[{} ]", ""));
-        String[] str = "[^\\d.]+".split(sb.toString());
-        double[] o = new double[str.length];
-        double[][] matrix = new double[2][o.length / 2];
-        for (int i = 0; i < str.length; i++) {
-            o[i] = Double.parseDouble(str[i]);
-        }
-        int count = 0;
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[i].length; j++) {
-                matrix[i][j] = o[count++];
+        String newStringLine = strMatrix.replaceAll("\\{", "").replaceAll(" ", "").replaceAll("},", "}");
+        String[] stringArray = newStringLine.split("}");
+        double[][] doubleArray = new double[stringArray.length][];
+
+        for (int i = 0; i < stringArray.length; i++) {
+            String[] rowStringArray = stringArray[i].split(",");
+            doubleArray[i] = new double[rowStringArray.length];
+            for (int j = 0; j < doubleArray[i].length; j++) {
+                doubleArray[i][j] = Double.parseDouble(rowStringArray[j]);
             }
         }
-        this.value = matrix;
+        value = doubleArray;
     }
 
     @Override
@@ -104,7 +101,7 @@ public class Matrix extends Var {
         if (other instanceof Vector
                 && value[0].length == ((Vector) other).getValue().length) {
             double[] valueVector = ((Vector) other).getValue();
-            double[] result = new double[valueVector.length];
+            double result[] = new double[valueVector.length];
             for (int i = 0; i < value.length; i++) {
                 for (int j = 0; j < valueVector.length; j++) {
                     result[i] = result[i] + value[i][j] * valueVector[j];
@@ -115,7 +112,7 @@ public class Matrix extends Var {
         }
         if (other instanceof Matrix
                 && value[0].length == ((Matrix) other).value.length) {
-            double[][] result = new double[value[0].length][((Matrix) other).value.length];
+            double[][] result = new double[value.length][((Matrix) other).value[0].length];
             for (int i = 0; i < value.length; i++) {
                 for (int j = 0; j < ((Matrix) other).value[0].length; j++) {
                     for (int k = 0; k < ((Matrix) other).value.length; k++) {
@@ -143,13 +140,26 @@ public class Matrix extends Var {
         return super.div(other);
     }
 
-    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder("{");
-        String d = "";
-        for (double[] element : value) {
-            sb.append(d).append("{").append(Arrays.toString(element).replace('[', ' ').replace(']', ' ').trim()).append("}");
-            d = ", ";
+
+        for (int i = 0; i < value.length - 1; i++) {
+            String delimeter = "";
+            sb.append("{");
+            for (int j = 0; j < value[0].length; j++) {
+                sb.append(delimeter).append(value[i][j]);
+                delimeter = ", ";
+            }
+            sb.append("}, ");
+        }
+        for (int i = value.length - 1; i < value.length; i++) {
+            String delimeter = "";
+            sb.append("{");
+            for (int j = 0; j < value[0].length; j++) {
+                sb.append(delimeter).append(value[i][j]);
+                delimeter = ", ";
+            }
+            sb.append("}");
         }
         sb.append("}");
         return sb.toString();

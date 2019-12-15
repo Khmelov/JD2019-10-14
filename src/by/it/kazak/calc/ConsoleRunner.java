@@ -24,6 +24,7 @@ public class ConsoleRunner {
                 System.out.println(e.getMessage());
             }
             printer.print(result);
+            Logger.get().log((expression+"="+result));
             if (expression.equals("printvar")) {
                 printer.print((Var) Var.getVars());
             }
