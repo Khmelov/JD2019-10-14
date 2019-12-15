@@ -6,7 +6,7 @@ public class CalcException extends Exception{
     }
 
     public CalcException(String message) {
-        super("ERROR:"+message);
+        super(ResMan.INSTANCE.get(Messages.CALCERROR)+message);
     }
 
     public CalcException(String message, Throwable cause) {

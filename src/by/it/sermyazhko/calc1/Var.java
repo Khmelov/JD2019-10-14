@@ -34,22 +34,25 @@ abstract class Var implements Operation {
 
     @Override
     public Var add(Var other) throws CalcException {
-        throw new CalcException(String.format("Сложение %s + %s невозможно\n", this, other));
+        //throw new CalcException(String.format("Сложение %s + %s невозможно\n", this, other));
+        throw new CalcException(String.format(ResMan.INSTANCE.get(Errors.VAR_ERRORADD), this, other));
     }
 
     @Override
     public Var sub(Var other) throws CalcException {
-        throw new CalcException(String.format("Вычитание %s - %s невозможно\n",this,other));
+       // throw new CalcException(String.format("Вычитание %s - %s невозможно\n",this,other));
+        throw new CalcException(String.format(ResMan.INSTANCE.get(Errors.VAR_ERRORSUB),this,other));
     }
 
     @Override
     public Var mul(Var other) throws CalcException {
-        throw new CalcException(String.format("Умножение %s * %s невозможно\n",this,other));
+        //throw new CalcException(String.format("Умножение %s * %s невозможно\n",this,other));
+        throw new CalcException(String.format(ResMan.INSTANCE.get(Errors.VAR_ERRORMUL),this,other));
     }
 
     @Override
     public Var div(Var other) throws CalcException {
-        throw new CalcException(String.format("Деление %s / %s невозможно\n", this, other));
+        throw new CalcException(String.format(ResMan.INSTANCE.get(Errors.VAR_ERRORDIV), this, other));
     }
 
     @Override
@@ -70,7 +73,8 @@ abstract class Var implements Operation {
        else if (vars.containsKey(value))
            return vars.get(value);
        else
-           throw new CalcException("Не удалось создать переменную");
+          // throw new CalcException("Не удалось создать переменную");
+           throw new CalcException(ResMan.INSTANCE.get(Messages.VAR_ERRORCREATEVARIAVLE));
     }
 
     static void save()  {

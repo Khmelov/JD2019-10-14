@@ -49,7 +49,7 @@ class Scalar extends Var {
         if (other instanceof Scalar){
             double temp = ((Scalar) other).value;
             if (temp == 0)
-                throw new CalcException("деление на 0");
+                throw new CalcException(ResMan.INSTANCE.get(Messages.VAR_ERRORDIV));
             return new Scalar(this.value/temp);
         }
         else

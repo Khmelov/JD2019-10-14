@@ -1,14 +1,12 @@
 package by.it.sermyazhko.jd02_05;
 
-
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class Runner {
+class Runner {
 
     public static void main(String[] args) {
 
