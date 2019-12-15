@@ -1,4 +1,4 @@
-package by.it.toporova.jd02_05;
+package by.it.toporova.jd02_05_refactored;
 
 
 import java.util.Locale;
