@@ -3,6 +3,8 @@ package by.it.komarov.jd02_01;
 public class Buyer extends Thread implements IBuyer, IUseBacket {
     private int num; // пробема обращения потоков к одному ресурсу
 
+    private boolean pensioneer = false;
+
     Buyer(int num){
         this.num = num;
         this.setName("Buyer №" + num + " ");

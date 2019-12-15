@@ -1,8 +1,7 @@
 package by.it.komarov.jd02_06;
 
-public class Runner {
+public class Went {
     public static void main(String[] args) {
-
         try{
             Logger.getInstance().log("The method is working");
             throw new Exception();
