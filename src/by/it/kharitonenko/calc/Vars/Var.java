@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 
 public abstract class Var implements IVar, IAdd, ISub, IMul, IDiv, IPatterns {
 
-    private static Map<String, Var> vars = new HashMap<>();
-
-    public static Var getVars(String name) {
-        return vars.get(name);
+    public static Map<String, Var> getVars() {
+        return vars;
     }
+
+    private static Map<String, Var> vars = new HashMap<>();
 
     public static Var setVars(String name, Var var) {
         vars.put(name, var);
@@ -30,21 +30,7 @@ public abstract class Var implements IVar, IAdd, ISub, IMul, IDiv, IPatterns {
         return "[abstract Var]";
     }
 
-    public static Var createVar(String strVar) throws CalcException {
-        if (strVar.matches(IPatterns.SCALAR))
-            return new VarS(strVar);
 
-        else if (strVar.matches(IPatterns.VECTOR))
-            return new VarV(strVar);
-
-        else if (strVar.matches(IPatterns.MATRIX))
-            return new VarM(strVar);
-
-        else if (vars.containsKey(strVar))
-            return vars.get(strVar);
-        else
-            throw new CalcException(ConsoleRunner.lang.get(errorMessages.INIT));
-    }
 
     public static void save() {
         try (PrintWriter writer = new PrintWriter(getFileName())) {

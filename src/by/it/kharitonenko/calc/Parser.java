@@ -49,14 +49,14 @@ public class Parser {
     }
 
     private Var oneOperation(String strLeft, String operation, String strRight) throws CalcException {
-        Var right = Var.createVar(strRight);
+        Var right = FactoryVar.createVar(strRight);
         //A=3 refactoring it
         if (operation.equals("=")) {
             Var.setVars(strLeft, right);
             return right;
         }
 
-        Var left = Var.createVar(strLeft);
+        Var left = FactoryVar.createVar(strLeft);
         if (left != null && right != null) {
             switch (operation) {
                 case "+":
@@ -89,7 +89,7 @@ public class Parser {
         }
         String[] part = expression.split(IPatterns.OPERATION);
         if (part.length == 1) {
-            return Var.createVar(expression);
+            return FactoryVar.createVar(expression);
         }
         List<String> operands = new ArrayList<>(Arrays.asList(part));
         List<String> operators = new ArrayList<>();
@@ -105,6 +105,6 @@ public class Parser {
             Var result = oneOperation(left, op, right);
             operands.add(index, result.toString());
         }
-        return Var.createVar(operands.get(0));
+        return FactoryVar.createVar(operands.get(0));
     }
 }
