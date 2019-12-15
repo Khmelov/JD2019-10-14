@@ -8,7 +8,7 @@ public class TaskB2 {
         String delLong = Poem.text.replace("...","   ");
         String[] sentences = delLong.split("[.!]+");
         replace(sentences);
-        compare(sentences);
+        sort(sentences);
         for (String sentence : sentences) {
             System.out.println(sentence);
         }
@@ -25,7 +25,7 @@ public class TaskB2 {
         }
     }
 
-    private static void compare(String[] sentences) {
+    private static void sort(String[] sentences) {
         boolean swap;
         int last = sentences.length-1;
         do {
