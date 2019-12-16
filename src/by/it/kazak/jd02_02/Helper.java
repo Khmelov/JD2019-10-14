@@ -6,8 +6,8 @@ class Helper {
 
     private static Random generator = new Random(System.nanoTime());
 
-    static int random(int max) {
-        return random(0, max);
+    static int random() {
+        return random(0, 2);
     }
 
     static int random(int start, int end) {
@@ -16,7 +16,7 @@ class Helper {
 
     static void sleepThread(int timeout) {
         try {
-            Thread.sleep(timeout / Counter.kSpeed);
+            Thread.sleep(timeout / Counter.K_SPEED);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
