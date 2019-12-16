@@ -1,6 +1,5 @@
 package by.it.sermyazhko.jd02_01;
 
-import sun.applet.resources.MsgAppletViewer;
 
 import java.util.Iterator;
 import java.util.Map;

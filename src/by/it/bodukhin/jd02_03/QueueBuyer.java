@@ -16,7 +16,6 @@ public class  QueueBuyer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
     static Buyer extractBuyer() {

@@ -1,6 +1,5 @@
 package by.it.sermyazhko.jd01_04;
 
-import sun.font.CreatedFontTracker;
 
 import java.util.Arrays;
 

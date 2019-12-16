@@ -1,0 +1,3 @@
+message.welcome=Привiтанне!
+user.firstname=Жэня
+user.lastname=Бадухiн

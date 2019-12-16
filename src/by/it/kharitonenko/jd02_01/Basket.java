@@ -4,7 +4,6 @@ import by.it.kharitonenko.jd02_01.Utils.Goods;
 
 import java.util.ArrayList;
 
-//TODO finish design
 public class Basket {
     private int capacity; //number of goods that can be stored
     private ArrayList<Goods> basket; //list of goods inside the customer's basket

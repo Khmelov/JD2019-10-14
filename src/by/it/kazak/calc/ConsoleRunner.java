@@ -1,28 +1,34 @@
 package by.it.kazak.calc;
 
+
 import java.util.Scanner;
 
 public class ConsoleRunner {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        Printer printer = new Printer();
+        try {
+            Var.load();
+        } catch (Exception e) {
+            System.out.println("Невозможно загрузить данные");
+        }
         Parser parser = new Parser();
-        Var.load();
+        Printer printer = new Printer();
+        Scanner scanner = new Scanner(System.in);
         for (; ; ) {
-            String expression = scanner.nextLine();
-            if (expression.equals("end")) {
-                Var.save();
-                break;
-            }
-            Var result;
+            String expression = scanner.nextLine().replace(" ", "");
+            if (expression.equals("end")) break;
+            Var result = null;
             try {
                 result = parser.evaluate(expression);
-                printer.print(result);
             } catch (CalcException e) {
                 System.out.println(e.getMessage());
             }
-
+            printer.print(result);
+            Logger.get().log((expression+"="+result));
+            if (expression.equals("printvar")) {
+                printer.print((Var) Var.getVars());
+            }
         }
     }
 }
+

@@ -1,0 +1,3 @@
+native2ascii -encoding utf-8 translate.txt C:/Users/zheny/IdeaProjects/JD2019-10-14-MyVersion/src/by/it/bodukhin/jd02_05/lang/translate.properties
+native2ascii -encoding utf-8 translate_ru_RU.txt C:/Users/zheny/IdeaProjects/JD2019-10-14-MyVersion/src/by/it/bodukhin/jd02_05/lang/translate_ru_RU.properties
+native2ascii -encoding utf-8 translate_ru_RU.txt C:/Users/zheny/IdeaProjects/JD2019-10-14-MyVersion/src/by/it/bodukhin/jd02_05/lang/translate_be_BY.properties

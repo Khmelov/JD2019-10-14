@@ -1,54 +1,24 @@
 package by.it.kazak.calc;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 abstract class Var implements Operation {
 
-
     private static Map<String, Var> vars = new HashMap<>();
 
-    static void set(String name, Var var) {
+    public static Map<String, Var> getVars() {
+        return vars;
+    }
+
+    static void saveVar(String name, Var var) {
         vars.put(name, var);
+        save();
     }
 
-    static Var get(String name) {
-        return vars.get(name);
-    }
-
-    @Override
-    public Var add(Var other) throws CalcException {
-        throw new CalcException(String.format("Сложение %s + %s невозможно\n", this, other));
-    }
-
-    @Override
-    public Var sub(Var other) throws CalcException {
-        throw new CalcException(String.format("Вычитание %s - %s невозможно\n", this, other));
-    }
-
-    @Override
-    public Var mul(Var other) throws CalcException {
-        throw new CalcException(String.format("Умножение %s * %s невозможно\n", this, other));
-    }
-
-    @Override
-    public Var div(Var other) throws CalcException {
-        throw new CalcException(String.format("Деление %s / %s невозможно\n", this, other));
-    }
-
-    @Override
-    public String toString() {
-        return "abstract Var";
-    }
-
-
-    public static Var createVar(String strVar) throws CalcException {
+    static Var createVar(String strVar) throws CalcException {
+        strVar = strVar.trim().replace("\\s+", "");
         if (strVar.matches(Patterns.SCALAR))
             return new Scalar(strVar);
         else if (strVar.matches(Patterns.VECTOR))
@@ -57,40 +27,65 @@ abstract class Var implements Operation {
             return new Matrix(strVar);
         else if (vars.containsKey(strVar))
             return vars.get(strVar);
-        else
-            throw new CalcException("Не удалось создать переменную");
+        throw new CalcException("Невозможно создать " + strVar);
     }
 
-    static void save() {
-        try (PrintWriter writer = new PrintWriter(getName())) {
+    private static void save() {
+        try (PrintWriter out = new PrintWriter(new FileWriter(getFileName()))) {
             for (Map.Entry<String, Var> pair : vars.entrySet()) {
-                writer.printf("%s=%s\n", pair.getKey(), pair.getValue().toString());
+                out.println(pair.getKey() + "=" + pair.getValue());
             }
         } catch (IOException e) {
-            System.out.println("file error");
+            e.printStackTrace();
         }
     }
 
+    static void load() throws CalcException {
+        Parser p = new Parser();
+        File file = new File(getFileName());
+        if (file.exists()) {
+            try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = in.readLine()) != null) {
+                    p.evaluate(line);
+                }
 
-    static void load() {
-        try {
-            Parser parser = new Parser();
-            for (String line : Files.lines(Paths.get(getName()))
-                    .collect(Collectors.toList())
-            ) {
-                parser.evaluate(line);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException | CalcException e) {
-            System.out.println("file error");
         }
-
-
     }
 
-    private static String getName() {
+    private static String getFileName() {
         String src = System.getProperty("user.dir") + File.separator + "src" + File.separator;
-        String strPackage = Var.class.getPackage().getName().replace(".", File.separator);
-        return src + strPackage + File.separator + "vars.txt";
+        String strPackage = Var.class.getPackage().getName();
+        String relPath = strPackage.replace(".", File.separator);
+        return src + relPath + File.separator + "vars.txt";
+    }
+
+    @Override
+    public Var add(Var other) throws CalcException {
+        throw new CalcException("Сложение " + this + " + " + other + " невозможно!");
+    }
+
+    @Override
+    public Var sub(Var other) throws CalcException {
+        throw new CalcException("Вычитание " + this + " + " + other + " невозможно!");
+    }
+
+    @Override
+    public Var mul(Var other) throws CalcException {
+        throw new CalcException("Умножение " + this + " + " + other + " невозможно!");
+    }
+
+    @Override
+    public Var div(Var other) throws CalcException {
+        throw new CalcException("Деление " + this + " + " + other + " невозможно!");
+    }
+
+    @Override
+    public String toString() {
+        return "Это класс Abstract Var";
     }
 }
 

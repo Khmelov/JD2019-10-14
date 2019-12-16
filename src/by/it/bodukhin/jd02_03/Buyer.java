@@ -2,13 +2,10 @@ package by.it.bodukhin.jd02_03;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Semaphore;
 
 class Buyer extends Thread implements IBuyer, IUseBacket {
 
     List<String> goodsInBacket = new ArrayList<>();
-
-    Semaphore sem = new Semaphore(20);
 
     private boolean pensioneer = false;
 
@@ -36,7 +33,7 @@ class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void chooseGoods() {
         try {
-            sem.acquire();
+            Dispatcher.semChoosingGoods.acquire();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -90,7 +87,7 @@ class Buyer extends Thread implements IBuyer, IUseBacket {
     @Override
     public void putGoodsToBacket() {
         System.out.println(this+" finished to choosed goods");
-        sem.release();
+        Dispatcher.semChoosingGoods.release();
         double price = 0;
         int countOfGoods = Helper.random(1, 4);
         int timeToPut = Helper.random(500, 2000);

@@ -1,6 +1,5 @@
 package by.it.sermyazhko.jd01_06;
 
-import com.sun.scenario.effect.impl.state.AccessHelper;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

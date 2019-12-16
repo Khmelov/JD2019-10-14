@@ -1,0 +1,14 @@
+var.div = Деление %s / %s невозможно\n
+var.add= Сложение %s + %s невозможно\n
+var.sub= Вычитание %s - %s невозможно\n
+var.mul= Умножение %s * %s невозможно\n
+scalar.devbyzero = деление на ноль
+var.createVar = Не удалось создать переменную
+error = ОШИБКА:
+unknown.value=неизвестная ошибка
+should_not.get=не должны сюда попасть
+file.error=Ошибка файла
+var.tostring = абстрактный var
+language.ru= ru
+language.en=en
+language.be=be
