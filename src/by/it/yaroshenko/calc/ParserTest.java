@@ -1,11 +1,10 @@
 package by.it.yaroshenko.calc;
 
-
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-class ParserTest {
+public class ParserTest {
 
     @Test
     public void scalarSumTest() throws Exception {
