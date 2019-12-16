@@ -1,6 +1,0 @@
-//messages
-message.welcome=Привет!
-message.info=для смены языка наберите ru be en. end = закрыть программу
-//user info
-user.firstname=Андрей
-user.lastname=Харитоненко

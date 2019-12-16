@@ -1,6 +1,0 @@
-LOG_1
-LOG_2
-LOG_1
-LOG_2
-LOG_1
-LOG_2

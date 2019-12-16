@@ -1,6 +1,0 @@
-message.welcome=Привет!
-message.question=Как дела?
-user.firstname=Ксения
-user.lastname=Барановская
-data.now = текущая дата
-format.full = yyyy-MMMM-dd HH:mm:ss

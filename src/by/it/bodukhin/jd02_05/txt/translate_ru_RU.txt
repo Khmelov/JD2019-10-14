@@ -1,3 +1,0 @@
-message.welcome=Привет!
-user.firstname=Женя
-user.lastname=Бодухин

@@ -1,5 +1,0 @@
-message.welcome=Привет!
-message.question=Как ты, бро?
-user.firstname=Матвей
-user.lastname=Процко
-date.currentdate=текущая дата:

@@ -1,4 +1,0 @@
-messedge.welcom=Добро пожаловать!
-messedge.question=Как дела!
-user.firstname=Павел
-user.lastname=Ярошенко
