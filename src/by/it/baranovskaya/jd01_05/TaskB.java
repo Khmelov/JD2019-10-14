@@ -7,40 +7,39 @@ public class TaskB {
         step1();
         step2();
     }
+
     private static void step1() {
-        for (double a = 0; a <=2 ; a = a + 0.2) {
-        for (int x = 1; x <= 6; x++) {
-            double y = pow(7, a) - cos(x);
-            y = y + pow(7, a) - cos(x);
-                             System.out.printf("При a=%1.2f Сумма y=%E\n", a, y);
-                         }
+        double y;
+        for (double a = 0; a <= 2; a = a + 0.2) {
+            y = 0;
+            for (int x = 1; x <= 6; x++) {
+                y += pow(7, a) - cos(x);
+            }
+                    System.out.println("Значение при а=" + a + " составляет " + y);
+                }
+            }
+
+        private static void step2 () {
+            double a, b;
+            for (double x = -5.5; x < 2; x = x + 0.5) {
+                b = 0;
+                if ((x / 2) > -2 & (x / 2) <= -1) {
+                    b = sin(x * x);
+                }
+                if ((x / 2) > -1 & (x / 2) <= 0.2) {
+                    b = cos(x * x);
+                }
+                if ((x / 2) == 0.2) {
+                    b = tan(x * x);
+                }
+                if (b == 0) {
+                    System.out.println("При x=" + x/2 + " значение не определено!");
+                }
+                else {
+                    a = log10(abs(b + 2.74));
+                    System.out.println("При х=" + x / 2 + " значение функции составит " + a);
+                }
+            }
         }
-    }
-    private static void step2() {
-        double a, b;
-        for (double x = -6; x <= 2 ; x = x + 0.5) {
-            if ((x/2) > -2 & (x/2) <= -1) {
-                b = sin(x*x);
-                a = log (abs( b + 2.74));
-                System.out.printf("При x/2=%1.2f a=%E\n", x, a);
-                System.out.println();
-            }
-            if ((x/2) > -1 & (x/2) <= 0.2) {
-                b = cos(x*x);
-                a = log (abs( b + 2.74));
-                System.out.printf("При x/2=%1.2f a=%E\n", x, a);
-                System.out.println();
-            }
-            if ((x/2) == 0.2) {
-                b = (cos(x*x)/sin(x*x));
-                a = log (abs( b + 2.74));
-                System.out.printf("При x/2=%1.2f a=%E\n", x, a);
-                System.out.println();
-            }
-            if ((x/2) < -2 & (x/2) > 0.2 ) {
-                System.out.printf("При x/2= вычисления не определены ", x);
-            }
-        }
-    }
     }
 

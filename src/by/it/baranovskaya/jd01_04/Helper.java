@@ -15,12 +15,12 @@ public class Helper {
 
     static double findMin(double[] array) {
         if (0 == array.length) {
-            return Integer.MIN_VALUE;
+            return Double.MIN_VALUE;
         } else {
             double min = array[0];
             for (double a :
                     array) {
-                if (min > a) {
+                if (min < a) {
                     min = a;
                 }
             }
@@ -30,12 +30,12 @@ public class Helper {
 
     static double findMax(double[] array) {
         if (0 == array.length) {
-            return Integer.MAX_VALUE;
+            return Double.MAX_VALUE;
         } else {
             double max = array[0];
             for (double a :
                     array) {
-                if (max < a) {
+                if (max > a) {
                     max = a;
                 }
             }
