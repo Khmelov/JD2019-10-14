@@ -1,0 +1,33 @@
+scalar_error.divscalar=Дзяленне на нуль
+
+vector_error.sumvectors=Складанне вектараў немагчыма - памеры не адпавядаюць патрабаванням
+vector_error.subvectors=Адніманне вектараў немагчыма - памеры не адпавядаюць патрабаванням
+vector_error.mulvectors=Множанне вектараў немагчыма - памеры не адпавядаюць патрабаванням
+vector_error.divvectors=Дзяленне вектараў немагчыма
+vector_error.divvectorszero=Дзяленне на нуль
+
+matrix_error.sumvector&matrix=Немагчыма дадаць вектар да матрыцы
+matrix_error.summatrix=Складанне матрыц немагчыма - памеры не адпавядаюць патрабаванням
+matrix_error.subvectorfrommatrix=Немагчыма аднять вектар ад матрыцы
+matrix_error.submatrix=Адніманне матрыц немагчыма - памеры не адпавядаюць патрабаванням
+matrix_error.mulmatrix&vector=Множанне матрыцы на вектар немагчыма - памеры не адпавядаюць патрабаванням
+matrix_error.mulmatrix=Множанне матрыц немагчыма - памеры не адпавядаюць патрабаванням
+matrix_error.divmatrix=Дзяленне на нуль
+
+var_error.createvar=Var пераменная не створана
+var_error.savedatatofile=Памылка пры захаванні зменнай у файл
+var_error.loaddatafromfile=Памылка загрузкі лакальных зменных
+var_error.operationimposible=Немагчымая аперація
+
+test_error=ПАМЫЛКА: вынік не адпавядае чаканням
+
+calcexception_message=ПАМЫЛКА:
+
+parser_error.invalidexpression=Выраз не карэкцен
+
+report_messages_reporttopicfull=ПОЎНАЯ СПРАВАЗДАЧА
+report_messages_reporttopicshort=КАРОТКАЯ СПРАВАЗДАЧА
+report_messages_startprogram=Старт праграмы:
+report_messages_operation=Уведзеная аперацыя:
+report_messages_operationres=Вынiк аперацыi:
+report_messages_finishprogram=Завяршэнне праграмы:

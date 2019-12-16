@@ -1,0 +1,33 @@
+scalar_error.divscalar=Division by zero
+
+vector_error.sumvectors=The addition of vectors is impossible - the sizes do not match
+vector_error.subvectors=Subtraction of vectors is impossible - the sizes do not match
+vector_error.mulvectors=Multiplication of vectors is impossible - the sizes do not match
+vector_error.divvectors=Vector division not possible
+vector_error.divvectorszero=Division by zero
+
+matrix_error.sumvector&matrix=Vector and matrix addition impossible
+matrix_error.summatrix=Matrix addition is not possible - dimensions do not match
+matrix_error.subvectorfrommatrix=Vector and matrix subtraction impossible
+matrix_error.submatrix=Subtraction of matrix is impossible - the sizes do not match
+matrix_error.mulmatrix&vector=Vector and matrix multiplication impossible
+matrix_error.mulmatrix=Multiplication of matrix is impossible - the sizes do not match
+matrix_error.divmatrix=Division by zero
+
+var_error.createvar=Var didn't create
+var_error.savedatatofile=Error saving data to file
+var_error.loaddatafromfile=Error reading file
+var_error.operationimposible=Impossible operation
+
+test_error=Error: incorrect result
+
+calcexception_message=ERROR:
+
+parser_error.invalidexpression=Expression is not correct
+
+report_messages_reporttopicfull=FULL REPORT
+report_messages_reporttopicshort=SHORT REPORT
+report_messages_startprogram=Start program:
+report_messages_operation=Operation:
+report_messages_operationres=Operation result:
+report_messages_finishprogram=Finish ptogram:
