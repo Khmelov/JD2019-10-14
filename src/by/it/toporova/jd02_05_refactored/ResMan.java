@@ -8,7 +8,7 @@ import java.util.ResourceBundle;
 public enum ResMan {
     INSTANCE;
 
-    private String path="by.it.toporova.jd02_05.lang.translate";
+    private String path="by.it.toporova.jd02_05_refactored.lang.translate";
 
     private ResourceBundle rb;
 
