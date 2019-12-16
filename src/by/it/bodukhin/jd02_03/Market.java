@@ -24,6 +24,7 @@ public class Market {
         for(Thread buyer : buyerList){
             buyer.join();
         }
+        while (!Dispatcher.threadPool.isTerminated()) Thread.yield();
         System.out.println("Market closed");
     }
 }

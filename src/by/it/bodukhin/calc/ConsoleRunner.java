@@ -17,7 +17,7 @@ public class ConsoleRunner {
             else if(expression.equals("sortvar")){
                 Var.printSortedMap();
             }
-            else {
+           else {
                 Var result = null;
                 try {
                     result = parser.evaluate(expression);
@@ -25,7 +25,7 @@ public class ConsoleRunner {
                 } catch (CalcException e) {
                     System.out.println(e.getMessage());
                 }
-            }
+           }
         }
     }
 }
