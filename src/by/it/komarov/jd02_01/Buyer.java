@@ -1,33 +1,61 @@
 package by.it.komarov.jd02_01;
 
-public class Buyer extends Thread implements IBuyer {
+public class Buyer extends Thread implements IBuyer, IUseBacket {
+    private int num; // пробема обращения потоков к одному ресурсу
 
-    Buyer(int number){
-        super("Bauyer№ " + number);
+    private boolean pensioneer = false;
+
+    Buyer(int num){
+        this.num = num;
+        this.setName("Buyer №" + num + " ");
+        start();
     }
 
     @Override
-    public void enterToMarket() {
-        System.out.println(this + " вошёл в магазин");
+    public void run() {
+        enterToMarket();
+        takeBacket();
+        chooseGoods();
+        putGoodsToBacket();
+        goOut();
     }
+
+    @Override
+    public void enterToMarket() { System.out.println(this + "enter to market"); }
 
     @Override
     public void chooseGoods() {
-        System.out.println(this + " выбирает товар");
-
-            System.out.println((int) (Math.random() * 3));
-
-
-        System.out.println(this + " закончил выбирать товар");
+        try {
+            System.out.println(this + "choosing goods");
+            Thread.sleep(Randomize.fromTo(500, 2000)); // метод sleep() бросает ошибку
+        } catch (InterruptedException e) {
+            System.out.println(this + "некорректное завершение ожидания");
+        }
     }
 
     @Override
-    public void goOut() {
-        System.out.println(this + " покинул магазин");
+    public void goOut() { System.out.println(this + "leave market"); }
+
+    @Override
+    public void takeBacket() {
+        try {
+            Thread.sleep(Randomize.fromTo(500, 2000));
+            System.out.println(this + "take backet");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public String toString() {
-        return getName();
+    public void putGoodsToBacket() {
+        try {
+            System.out.println(this + "put goods to backet");
+            Thread.sleep(Randomize.fromTo(500, 2000));
+            for (int i = 0; i < Randomize.fromTo(1,4); i++) {
+                System.out.println(Backet.chooseList());
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
