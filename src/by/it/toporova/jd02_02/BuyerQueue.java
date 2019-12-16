@@ -9,7 +9,6 @@ class BuyerQueue {
     private static Deque<Buyer> retiredQueue = new LinkedList<>();     //очередь для пенсионеров
 
 
-    //геттер размера очереди
     static int getQueueSize() {
         return queue.size();
     }
@@ -23,7 +22,6 @@ class BuyerQueue {
         }
     }
 
-    //метод для вывода покупателя из очереди (в кассу)
     static synchronized Buyer takeOutOfQueue() {
         if (retiredQueue.size() > 0) return retiredQueue.pollFirst();
         else if (queue.size() > 0) return queue.pollFirst();

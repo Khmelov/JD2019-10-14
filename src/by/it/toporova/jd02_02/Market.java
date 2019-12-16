@@ -1,5 +1,8 @@
 package by.it.toporova.jd02_02;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +15,7 @@ public class Market {
     private static LinkedList<Integer> enteredBuyers = new LinkedList<>();
 
     static List<Thread> listOfThreads = new ArrayList<>();    //коллекция всех запущенных потоков
-    private static int number = 1;     //статическое поле для нумерации покупателей
+    private static int number = 1;     // поле для нумерации покупателей
 
     public static void main(String[] args) {
         workingMarket();
@@ -21,7 +24,7 @@ public class Market {
 
     //вывод статистики магазина по секундам (по запускам покупателей
     private static void marketStatistics() {
-        System.out.println("Buyers in Market Statistics:");
+        System.out.println("Statistics:");
         System.out.println("---------------------------------------------------------------------------------------------------------------");
         int n = numberOfBuyers.size();
         System.out.print("entry №  | number of buyers in the market | entered buyers | total number of buyers (in the market + entered) |\n");
@@ -37,13 +40,13 @@ public class Market {
         }
     }
 
-    //метод "магазин в рабочем состоянии"
     private static void workingMarket() {
         int max_entries = 2;
         synchronized (Dispatcher.LOCK_CONSOLE) {
             System.out.println("Market is open");
         }
 
+        cashierLogStart();
         startOfFirstCashier();
         for (int i = 1; i <= 180; i++) {
             enteringBuyers(max_entries, i);
@@ -68,7 +71,21 @@ public class Market {
         }
     }
 
-    //метод для открытия первой кассы
+
+    private static void cashierLogStart() {
+        String path = Helper.getCashierLogPath();
+        try (PrintWriter pw = new PrintWriter(new FileWriter(path))) {
+            pw.printf("%-18s%-18s%-18s%-18s%-18s%-18s%s\n",
+                    "Cashier№1", "Cashier№2", "Cashier№3",
+                    "Cashier№4", "Cashier№5", "Queue-size", "Summary");
+            pw.println("----------------------------------------------------------" +
+                    "------------------------------------------------------------");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //открытие первой кассы
     private static void startOfFirstCashier() {
         Cashier c = new Cashier(Dispatcher.cashiersNumber++);
         Thread th = new Thread(c);
@@ -76,7 +93,7 @@ public class Market {
         th.start();
     }
 
-    //метод для запуска покупателей в магазин пилообразно
+    //поэтапный запуск покупателей
     private static void enteringBuyers(int max_entries, int i) {
         int sec = i % 60;
         int num = -1;

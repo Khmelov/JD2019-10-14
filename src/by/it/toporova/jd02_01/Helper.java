@@ -1,6 +1,4 @@
-package by.it.toporova.jd02_02;
-
-import java.io.File;
+package by.it.toporova.jd02_01;
 
 class Helper {
     static int getRandom(int min, int max){
@@ -9,14 +7,14 @@ class Helper {
 
     public static void sleep(int timeout) {
         try {
-            Thread.sleep(timeout/ Dispatcher.k_speed);
+            Thread.sleep(timeout/Dispatcher.k_speed);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    static String getRandomGoods(int priceListSize) { //рандомізатор товара
-        int goodNumber = getRandom(1, priceListSize);
+    static String getRandomGoods() {//рандомный набор товаров по списку
+        int goodNumber = getRandom(1, Goods.priceList.size());
         switch (goodNumber){
             case 1: return "хлеб";
             case 2: return "молоко";
@@ -31,12 +29,5 @@ class Helper {
             case 11: return "яйца";
             default: return null;
         }
-    }
-
-    public static String getCashierLogPath() {
-        String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
-        String name = Cashier.class.getName().replace(".", File.separator);
-        name = name.replace(Cashier.class.getSimpleName(), "cashierLog.txt");
-        return path + name;
     }
 }
