@@ -1,0 +1,4 @@
+message.welcome=Привiтанне?
+message.question=Як справы?
+message.userName=Джон
+message.userLastname=Доу

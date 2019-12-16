@@ -1,4 +1,4 @@
-package by.it.yurtsevich.jd02_01;
+package by.it.yurtsevich.jd02_02;
 
 public class Dispacther {
     static int countBuyer=0;
@@ -17,5 +17,8 @@ public class Dispacther {
 
     static int getBuyerInMarket() {
         return buyerInMarket;
+    }
+
+    public static boolean marketClosed() {return marketClosed();
     }
 }
