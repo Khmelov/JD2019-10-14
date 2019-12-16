@@ -1,6 +1,15 @@
 package by.it.komarov.jd02_06;
 
+import java.util.HashMap;
+import java.util.Map;
+
 abstract class Var implements Operation{
+
+    private static Map<String, Var> vars = new HashMap<>();
+
+    static void set(String name, Var var) {
+        vars.put(name, var);
+    }
 
     static Var createVar(String operand){
         operand = operand.trim().replace("\\s+", "");

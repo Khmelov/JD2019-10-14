@@ -12,6 +12,7 @@ public class Runner {
         else
             lang.setLocale(Locale.ENGLISH);
 
+        lang.setLocale(new Locale("ru", "RU"));
         System.out.println(lang.get(Messages.WELCOME));
         System.out.println(lang.get(Messages.QUESTION));
         System.out.printf("%s %s\n",
@@ -19,5 +20,4 @@ public class Runner {
                 lang.get(User.LAST_NAME)
         );
     }
-
 }

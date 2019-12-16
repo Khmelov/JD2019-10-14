@@ -6,21 +6,18 @@ import java.util.ResourceBundle;
 public enum ResMan {
     INSTANCE;
 
-    private String path="by.it.komarov.jd02_05.lang.translate";
-
-    private ResourceBundle rb;
-
+    private ResourceBundle resourceBundle;
+    private final String resourseName = "by.it.komarov.jd02_05.lang.translate";
     private Locale locale;
 
     ResMan() {
-        setLocale(Locale.getDefault());
+        resourceBundle = ResourceBundle.getBundle(resourseName, Locale.getDefault());
     }
 
     void setLocale(Locale locale){
-        this.locale=locale;
-        rb=ResourceBundle.getBundle(path,this.locale);
+        resourceBundle = ResourceBundle.getBundle(resourseName, this.locale);
     }
-
-    String get(String key) { return rb.getString(key); }
-
+    String get(String key) {
+        return resourceBundle.getString(key);
+    }
 }
