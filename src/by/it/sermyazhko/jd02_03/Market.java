@@ -1,13 +1,17 @@
 package by.it.sermyazhko.jd02_03;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
 
 public class Market {
 
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Market opened");
+        //Goods.setProducts();
 
         ExecutorService threadPool = Executors.newFixedThreadPool(5);
 
@@ -15,8 +19,6 @@ public class Market {
             Cashier cashier = new Cashier(i);
             threadPool.execute(cashier);
         }
-
-
         int numberBuyer = 0;
         while (Dispatcher.marketOpened()) {
             int currentCount = Helper.random(2);
@@ -30,7 +32,6 @@ public class Market {
         }
 
         threadPool.shutdown();
-        //noinspection StatementWithEmptyBody
         while (!threadPool.awaitTermination(1, TimeUnit.MILLISECONDS));
         System.out.println("Market closed");
     }
