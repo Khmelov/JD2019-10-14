@@ -70,13 +70,13 @@ public class Buyer extends Thread implements IBuyer, IUseBasket {
     }
 
     private void putGoodsFromOneToFour() {
-        Dispatcher.setGoods();
+        Goods.setGoods();
         int countOfGoods = Helper.random(1, 4);
         for (int i = 1; i <= countOfGoods; i++) {
             Random random = new Random();
-            ArrayList<String> keys = new ArrayList<>(Dispatcher.mapGoods.keySet());
+            ArrayList<String> keys = new ArrayList<>(Goods.mapGoods.keySet());
             String randomKey = keys.get(random.nextInt(keys.size()));
-            String value = Dispatcher.mapGoods.get(randomKey);
+            String value = Goods.mapGoods.get(randomKey);
             String goods = randomKey + " prise " + value + "$";
             System.out.printf("%s put %s\n", this, goods);
         }

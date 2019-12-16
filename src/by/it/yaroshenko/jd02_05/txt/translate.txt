@@ -1,0 +1,4 @@
+messedge.welcom=welcom!
+messedge.question=How do you do!
+user.firstname=Pavel
+user.lastname=Yaroshenko

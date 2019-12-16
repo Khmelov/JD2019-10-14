@@ -1,0 +1,32 @@
+Sun Dec 15 15:58:05 EET 2019	class by.it.yaroshenko.calc.CalcException
+Sun Dec 15 15:58:13 EET 2019	class by.it.yaroshenko.calc.CalcException
+Sun Dec 15 15:58:17 EET 2019	class by.it.yaroshenko.calc.CalcException
+Sun Dec 15 16:02:16 EET 2019	
+endSun Dec 15 16:16:57 EET 2019	public class by.it.yaroshenko.calc.CalcException
+Sun Dec 15 17:41:00 EET 2019	
+Sun Dec 15 17:41:34 EET 2019	
+ERROR: Невозможно создать {1,
+Sun Dec 15 17:41:34 EET 2019	
+ERROR: Невозможно создать 3}
+Sun Dec 15 17:49:53 EET 2019	F=1
+Sun Dec 15 17:50:11 EET 2019	Z={1,
+ERROR: Невозможно создать {1,
+Sun Dec 15 17:50:11 EET 2019	3}
+ERROR: Невозможно создать 3}
+Sun Dec 15 17:50:16 EET 2019	V=11
+Sun Dec 15 17:50:27 EET 2019	N+{1,4)
+ERROR: Невозможно создать {1,4)
+Sun Dec 15 17:52:22 EET 2019	V=11
+Sun Dec 15 17:52:24 EET 2019	V-11
+Sun Dec 15 17:52:31 EET 2019	N={1,
+Sun Dec 15 17:52:31 EET 2019 ERROR: Невозможно создать {1,
+Sun Dec 15 17:52:31 EET 2019	5}
+Sun Dec 15 17:52:31 EET 2019 ERROR: Невозможно создать 5}
+Sun Dec 15 17:53:16 EET 2019	G=0/0
+Sun Dec 15 17:53:16 EET 2019 ERROR: Деление на ноль
+Sun Dec 15 17:54:45 EET 2019	G=0/0
+Sun Dec 15 17:54:45 EET 2019 ERROR: Деление на нольby.it.yaroshenko.calc.CalcException: ERROR: Деление на ноль
+Sun Dec 15 17:55:29 EET 2019	0/0
+Sun Dec 15 17:55:29 EET 2019 ERROR: by.it.yaroshenko.calc.CalcException: ERROR: Деление на ноль
+Sun Dec 15 17:56:09 EET 2019	0/0
+Sun Dec 15 17:56:09 EET 2019 ERROR: 

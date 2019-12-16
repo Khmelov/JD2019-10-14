@@ -1,11 +1,15 @@
 package by.it.yaroshenko.calc;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 abstract class Var implements Operation {
 
@@ -33,7 +37,7 @@ abstract class Var implements Operation {
         return vars;
     }
 
-    static Var createVar(String operand) throws CalcException{
+    static Var createVar(String operand) throws CalcException {
         operand=operand.replaceAll("\\s+","");
         if (operand.matches(Patterns.SCALAR)) {
             return new Scalar(operand);
@@ -53,12 +57,12 @@ abstract class Var implements Operation {
     static void save(){
         try (PrintWriter printWriter = new PrintWriter(getFileName())){
             for (Map.Entry<String, Var> pair : vars.entrySet()) {
-                printWriter.printf("%s=%s\n",pair.getKey(),pair.getValue().toString());
+                printWriter.printf("%s=%s\n", pair.getKey(), pair.getValue().toString());
             }
+
         }  catch (IOException e) {
         System.out.println("file error");
-    }
-        ;
+    };
     }
 
     static void load() {
@@ -88,22 +92,22 @@ abstract class Var implements Operation {
     }
 
     @Override
-    public Var add(Var other) throws CalcException{
+    public Var add(Var other) throws CalcException {
        throw new CalcException("Сложение"+this+"+"+other+"невозможно\n");
     }
 
     @Override
-    public Var sub (Var other) throws CalcException{
+    public Var sub (Var other) throws CalcException {
         throw new CalcException("Вычитание"+this+"-"+other+"невозможно\n");
     }
 
     @Override
-    public Var mul (Var other) throws CalcException{
+    public Var mul (Var other) throws CalcException {
         throw new CalcException("Умножение"+this+"*"+other+"невозможно\n");
     }
 
     @Override
-    public Var div (Var other) throws CalcException{
+    public Var div (Var other) throws CalcException {
         throw new CalcException("Деление"+this+"/"+other+"невозможно\n");
     }
 }

@@ -20,10 +20,8 @@ class Parser {
                 case "-": return one.sub(two);
                 case "*": return one.mul(two);
                 case "/": return one.div(two);
-
             }
         }
         return null;
     }
-
 }

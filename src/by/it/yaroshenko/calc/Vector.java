@@ -16,7 +16,7 @@ public class Vector extends Var {
         this.value = otherVector.value;
     }
     Vector(String strValue) {
-        String[] array_str = strValue.replaceAll("[{}]", "").split("[^\\d.]+");
+        String[] array_str = strValue.replaceAll("[{}\\s]", "").split("[^\\d.]+");
         double[] array_double = new double[array_str.length];
         for (int i = 0; i < array_str.length; i++) {
            array_double[i]=Double.parseDouble(array_str[i]);
@@ -25,7 +25,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var add(Var other)  throws CalcException{
+    public Var add(Var other)  throws CalcException {
         if (other instanceof Scalar) {
             double[] array = Arrays.copyOf(value, value.length);
             for (int i = 0; i < array.length; i++) {
@@ -39,7 +39,7 @@ public class Vector extends Var {
             for (int i = 0; i < array.length; i++) {
                 array[i] = array[i] + ((Vector) other).value[i];
             }
-            } else throw new  CalcException("Разная длинна векторов");
+            } else throw new CalcException("Разная длинна векторов");
             return new Vector(array);
         }
 
@@ -48,7 +48,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var sub(Var other)  throws CalcException{
+    public Var sub(Var other)  throws CalcException {
         if (other instanceof Scalar) {
             double[] array = Arrays.copyOf(value, value.length);
             for (int i = 0; i < array.length; i++) {
@@ -61,7 +61,7 @@ public class Vector extends Var {
             for (int i = 0; i < array.length; i++) {
                 array[i]=array[i]-((Vector) other).value[i];
             }
-            } else throw new  CalcException("Разная длинна векторов");
+            } else throw new CalcException("Разная длинна векторов");
             return new Vector(array);
         }
 
@@ -70,7 +70,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var mul(Var other)  throws CalcException{
+    public Var mul(Var other)  throws CalcException {
             if (other instanceof Scalar) {
             double[] array = Arrays.copyOf(value, value.length);
             for (int i = 0; i < array.length; i++) {
@@ -85,7 +85,7 @@ public class Vector extends Var {
                 array[i]=array[i]*((Vector) other).value[i];
                 sum+=array[i];
             }
-                } else throw new  CalcException("Разная длинна векторов");
+                } else throw new CalcException("Разная длинна векторов");
             return new Scalar(sum);
         }
 
@@ -94,7 +94,7 @@ public class Vector extends Var {
     }
 
     @Override
-    public Var div(Var other)  throws CalcException{
+    public Var div(Var other)  throws CalcException {
         if(other instanceof Scalar) {
             if (((Scalar) other).getValue()==0) {
                 throw  new CalcException("Деление на ноль");

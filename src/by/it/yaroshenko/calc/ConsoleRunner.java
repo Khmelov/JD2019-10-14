@@ -1,5 +1,7 @@
 package by.it.yaroshenko.calc;
 
+import by.it.yaroshenko.jd02_06.Singleton;
+
 import java.util.Scanner;
 
 public class ConsoleRunner extends Var {
@@ -11,11 +13,10 @@ public class ConsoleRunner extends Var {
         Printer printer = new Printer();
         Var.load();
 
-
-
         while (!((line = scanner.next()).equals("end"))) {
-
             Var.save();
+
+            Logger.getInstance().addLogFile(Logger.dataAndTimeLog()+"\t"+line);
 
             if ((line).equals("printvar")) {
                 printer.printHashMap(Var.getMap());

@@ -1,8 +1,9 @@
 package by.it.yaroshenko.calc;
 
-public class Patterns {
-    static final String OPERATION = "[-=+/*]";
-    static final String SCALAR = "-?[\\d]+\\.?[\\d]*";
-    static final String VECTOR = "\\{(("+SCALAR+"),?)+}";
-    static final String MATRIX = "\\{("+VECTOR+",?)+}";
+interface Patterns {
+    String SCALAR="(-?)[0-9]+(\\.[0-9]+)?";
+    String VECTOR="\\{"+SCALAR+"(,"+SCALAR+")*}";
+    String MATRIX="\\{"+VECTOR+"(,"+VECTOR+")*}";
+    String OPERATION="(?<=[^-+*/={,])[-+*/=]";
+
 }

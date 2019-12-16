@@ -1,10 +1,6 @@
 package by.it.yaroshenko.jd01_13;
 
-import by.it.komarov.jd01_09.Parser;
-
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class TaskB {
     public static void main(String[] args) {
@@ -37,22 +33,16 @@ public class TaskB {
                     break;
                 }
             }
-
                 //System.out.println("Вы ввели не число");
             }
-
 //        } catch (Exception e) {
 //
 //        }
-
-
-
 //            StringBuilder sb = new StringBuilder(s);
 //            Pattern pattern = Pattern.compile("[\\d]+");
 //            Matcher matcher = pattern.matcher(sb);
 //            while (matcher.find()) {
 //                String word = matcher.group();
-
             }
         }
     }

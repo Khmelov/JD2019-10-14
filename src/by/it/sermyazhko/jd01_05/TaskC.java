@@ -1,6 +1,5 @@
 package by.it.sermyazhko.jd01_05;
 
-import com.sun.xml.internal.fastinfoset.stax.factory.StAXOutputFactory;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

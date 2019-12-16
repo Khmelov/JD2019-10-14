@@ -47,7 +47,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var add(Var other)  throws CalcException{
+    public Var add(Var other)  throws CalcException {
         if (other instanceof Scalar) {
             Matrix array = new Matrix(this.value);
             this.value=Arrays.copyOf(this.value, this.value.length);
@@ -70,7 +70,7 @@ public class Matrix extends Var {
         }
 
     @Override
-    public Var sub(Var other)  throws CalcException{
+    public Var sub(Var other)  throws CalcException {
         if (other instanceof Scalar) {
             Matrix array = new Matrix(this.value);
             this.value=Arrays.copyOf(this.value, this.value.length);
@@ -93,7 +93,7 @@ public class Matrix extends Var {
     }
 
     @Override
-    public Var mul(Var other)  throws CalcException{
+    public Var mul(Var other)  throws CalcException {
         this.value=Arrays.copyOf(value,value.length);
         Matrix result = new Matrix(value);
         if (other instanceof Matrix){

@@ -1,7 +1,6 @@
 package by.it.yaroshenko.jd02_02;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Dispatcher {
     static int kspeed=1000;

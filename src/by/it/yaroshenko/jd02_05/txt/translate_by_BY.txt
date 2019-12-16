@@ -1,0 +1,4 @@
+messege.welcom=Прыветанне!
+messege.question=Як справы!
+user.firstname=Павел
+user.lastname=Ярашэнка
