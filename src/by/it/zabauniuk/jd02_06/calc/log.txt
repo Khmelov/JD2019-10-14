@@ -9,3 +9,7 @@
 15.12.2019 20:50:06.8867222 LOG: a calculated, result: 8.0
 15.12.2019 20:50:06.8867222 LOG: -a=8 calculated, result: 8.0
 15.12.2019 20:50:06.8867222 LOG: a+-a+b+12+27 calculated, result: 60.0
+17.12.19 04:19:09.054 LOG: calculator started
+17.12.19 04:19:09.054 LOG: 2*2 calculated, result: 4.0
+17.12.19 04:19:09.054 LOG: ERROR: невозможно создать End
+17.12.19 04:19:09.054 LOG: calculator finished
