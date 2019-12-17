@@ -16,7 +16,7 @@ public class MatrixTest {
         } catch (CalcException e) {
             e.printStackTrace();
         }
-        String expected1 = "{{2.1, 3.1}, {4.1, 5.1}}";
+        String expected1 = "{{2.1, 4.1}, {4.1, 5.1}}";
         assertEquals(expected1, actual);
         String expression2 = "{{1,2},{3,4}}+{{-1,-2},{-3,-4}}";
         try {
@@ -46,7 +46,7 @@ public class MatrixTest {
         } catch (CalcException e) {
             e.printStackTrace();
         }
-        String expected2 = "{{2.0, 4.0}, {6.0, 8.0}}";
+        String expected2 = "{{2.0, 4.0}, {5.0, 8.0}}";
         assertEquals(expected2, actual);
     }
 
@@ -63,7 +63,7 @@ public class MatrixTest {
         String expected1 = "{{2.5, 5.0}, {7.5, 10.0}}";
         assertEquals(expected1, actual);
 
-        String expression2 = "{{1,2},{3,4}}*{1,2}";
+        String expression2 = "{{1,2},{3,4}}*{1,4}";
         try {
             actual = parser.calc(expression2).toString();
         } catch (CalcException e) {
@@ -84,7 +84,7 @@ public class MatrixTest {
 
     @Test
     public void checkMatrixDiv() {
-        String expression1 = "{{1,2},{3,4}}/2";
+        String expression1 = "{{1,2},{3,4}}/3";
         Parser parser = new Parser();
         String actual = null;
         try {

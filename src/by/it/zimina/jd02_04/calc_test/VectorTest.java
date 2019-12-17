@@ -8,7 +8,7 @@ public class VectorTest {
 
     @Test
     public void checkVectorAdd() {
-        String expression1 = "{1,2}+5.5";
+        String expression1 = "{1,2}+5.3";
         Parser parser = new Parser();
         String actual = null;
         try {
@@ -30,7 +30,7 @@ public class VectorTest {
 
     @Test
     public void checkVectorSub() {
-        String expression1 = "{10,11.5}-5.5";
+        String expression1 = "{10,11.5}-5.6";
         Parser parser = new Parser();
         String actual = null;
         try {
@@ -52,7 +52,7 @@ public class VectorTest {
 
     @Test
     public void checkVectorMul() {
-        String expression1 = "{10,11.5}*2";
+        String expression1 = "{10,11.5}*4";
         Parser parser = new Parser();
         String actual = null;
         try {
@@ -74,7 +74,7 @@ public class VectorTest {
 
     @Test
     public void checkVectorDiv() {
-        String expression1 = "{10,11.5}/2";
+        String expression1 = "{10,11.5}/7";
         Parser parser = new Parser();
         String actual = null;
         try {

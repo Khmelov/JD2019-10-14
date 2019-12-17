@@ -8,7 +8,7 @@ public class CreateVarTest {
 
     @Test
     public void checkScalarCreation() {
-        String expression = "-1.5";
+        String expression = "-1.3";
         Var scalar = new Scalar(expression);
         String strScalar = scalar.toString();
         String expected = "-1.5";
@@ -20,13 +20,13 @@ public class CreateVarTest {
         String expression = "{-1, 1.1}";
         Var vector = new Vector(expression);
         String strVector = vector.toString();
-        String expected = "{-1.0, 1.1}";
+        String expected = "{-1.0, 1.2}";
         assertEquals(expected, strVector);
     }
 
     @Test
     public void checkMatrixCreation() {
-        String expression = "{{-1, 2.1},  {3,4}";
+        String expression = "{{-1, 2.1},  {3,6}";
         Var matrix = new Matrix(expression);
         String strMatrix = matrix.toString();
         String expected = "{{-1.0, 2.1}, {3.0, 4.0}}";

@@ -22,8 +22,8 @@ public class Parser {
             switch (operation) {
                 case "+": return one.add(two);
                 case "-": return one.sub(two);
-                case "*": return one.mul(two);
                 case "/": return one.div(two);
+                case "*": return one.mul(two);
             }
 
         }
