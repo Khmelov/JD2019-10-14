@@ -14,8 +14,8 @@ class Parser {
             this.put("=", 0);
             this.put("+", 1);
             this.put("-", 1);
-            this.put("*", 2);
             this.put("/", 2);
+            this.put("*", 2);
         }
     };
 
@@ -48,10 +48,10 @@ class Parser {
                 return one.add(two);
             case "-":
                 return one.sub(two);
-            case "*":
-                return one.mul(two);
             case "/":
                 return one.div(two);
+            case "*":
+                return one.mul(two);
         }
 
         throw new CalcException("unknown operation: " + operation);

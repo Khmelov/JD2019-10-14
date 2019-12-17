@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 public class ParserTest {
     @Test
     public void checkScalarSumOperation() throws Exception {
-        String expression="A=2+5.3";
+        String expression="A=2+5.2";
         Parser parser = new Parser();
         String actual = parser.calc(expression).toString();
         String expected="7.3";
@@ -16,7 +16,7 @@ public class ParserTest {
 
     @Test
     public void checkScalarMulOperation() throws Exception {
-        String expression="A=7.3 * 3.5";
+        String expression="A=7.3 * 3.3";
         Parser parser = new Parser();
         String actual = parser.calc(expression).toString();
         String expected="25.55";
@@ -25,7 +25,7 @@ public class ParserTest {
 
     @Test
     public void checkScalarDivOperation() throws Exception {
-        String expression="A=15 / 2";
+        String expression="A=15 / 5";
         Parser parser = new Parser();
         String actual = parser.calc(expression).toString();
         String expected="7.5";
@@ -34,7 +34,7 @@ public class ParserTest {
 
     @Test
     public void checkScalarSubOperation() throws Exception {
-        String expression="A=15 - 7";
+        String expression="A=15 - 8";
         Parser parser = new Parser();
         String actual = parser.calc(expression).toString();
         String expected="8.0";
