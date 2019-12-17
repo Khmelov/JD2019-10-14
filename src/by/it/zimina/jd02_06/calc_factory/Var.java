@@ -13,21 +13,20 @@ abstract class Var implements Operation {
    }
 
     static Var createVar(String strVar) throws CalcException {
-        strVar = strVar.trim().replace("\\s+","");
-        if (strVar.matches(Patterns.SCALAR)){
-            return new Scalar(strVar);
-        }
-        else if (strVar.matches(Patterns.VECTOR)){
-            return new Vector(strVar);
-        }
-        else if (strVar.matches(Patterns.MATRIX)){
-            return new Matrix(strVar);
-        }
-        else if (vars.containsKey(strVar)){
+        strVar = strVar.trim().replace("\\s+", "");
+        VarFactory factory;
+        if (strVar.matches(Patterns.SCALAR)) {
+            factory = new ScalarFactory();
+            return factory.createVar(strVar);
+        } else if (strVar.matches(Patterns.VECTOR)) {
+            factory = new VectorFactory();
+            return factory.createVar(strVar);
+        } else if (strVar.matches(Patterns.MATRIX)) {
+            factory = new MatrixFactory();
+            return factory.createVar(strVar);
+        } else if (vars.containsKey(strVar))
             return vars.get(strVar);
-
-        }
-        throw new CalcException("Невозможно создать "+strVar);
+        throw new CalcException("невозможно создать " + strVar);
     }
 
 
