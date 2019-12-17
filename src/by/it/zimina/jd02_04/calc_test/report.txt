@@ -1,6 +1,0 @@
-Calculator report
-Start time: 04:21:59.359
-1 calculated, result: 1.0
-3+10 calculated, result: 13.0
-17.12.19 04:22:09.111 LOG: CalcException
-Finish time: 04:22:11.395
