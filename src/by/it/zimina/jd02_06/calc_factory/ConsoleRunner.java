@@ -8,7 +8,7 @@ public class ConsoleRunner {
     public static void main(String[] args) {
 
         Logger logger = Logger.getLogger();
-        logger.log("calculator started");
+        logger.log("start calculation");
         Report.Builder reportBuilder = new Report.Builder();
         reportBuilder.setReportType(Report.Type.SHORT)
                 .setTitle("Calculator report")
@@ -23,7 +23,7 @@ public class ConsoleRunner {
             try {
                 Var result = parser.calc(line);
                 printer.print(result);
-                logger.log(line + " calculated, result: " + result);
+                logger.log(line + " result: " + result);
                 reportBuilder.addAction(line + " calculated, result: " + result);
             } catch (CalcException e) {
                 System.out.println(e.getMessage());
