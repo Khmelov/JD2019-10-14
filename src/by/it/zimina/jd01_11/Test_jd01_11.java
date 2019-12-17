@@ -1,4 +1,4 @@
-package by.it.zimina.jd01_11.calc;
+package by.it.zimina.jd01_11;
 
 
 import org.junit.Test;
