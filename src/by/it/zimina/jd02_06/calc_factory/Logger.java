@@ -1,55 +1,71 @@
 package by.it.zimina.jd02_06.calc_factory;
 
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.LocalDateTime;
+import java.text.DateFormat;
+import java.time.Instant;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 
 class Logger {
 
-    private static volatile Logger instanse;
+    private String path = getPath(Logger.class);
+    private String filename = "log.txt";
+    private String fullPath = path + filename;
 
     private Logger() {
 
     }
 
-    static Logger get() {
-        if (instanse == null) {
+    private static volatile Logger logger;
+
+    static Logger getLogger() {
+        Logger loggerLocal = logger;
+        if (loggerLocal == null) {
             synchronized (Logger.class) {
-                if (instanse == null) {
-                    instanse = new Logger();
+                loggerLocal = logger;
+                if (loggerLocal == null) {
+                    logger = new Logger();
+                    loggerLocal = logger;
                 }
             }
         }
-        return instanse;
+        return loggerLocal;
     }
 
-    private String filename = getPath(Logger.class) + "log.txt";
+    private String stringDate = getDate();
+    private String stringTime = getTime();
 
-
-    void log(String text) {
-        try (PrintWriter out = new PrintWriter(new FileWriter(filename, true))) {
-            out.append(text).append("\n");
+    synchronized void log(String message) {
+        try (PrintWriter printWriter = new PrintWriter(
+                new FileWriter(fullPath, true))) {
+            printWriter.println(stringDate + " " + stringTime + " LOG: " + message);
+            printWriter.flush();
         } catch (IOException e) {
-            System.out.println("What?");
+            e.printStackTrace();
         }
     }
 
-    private static String getPath(Class<?> aClass) {
-        return System.getProperty("user.dir")
-                + File.separator + "src" + File.separator +
-                aClass
-                        .getName()
-                        .replace(aClass.getSimpleName(), "")
-                        .replace(".", File.separator);
+    static String getDate() {
+        Instant now = Instant.now();
+        Date date = Date.from(now);
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault());
+        return dateFormat.format(date);
     }
 
-    static String timeFormat(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
-        return dtf.format(LocalDateTime.now());
+    static String getTime() {
+        LocalTime localTime = LocalTime.now();
+        return localTime.format(DateTimeFormatter.ISO_LOCAL_TIME);
     }
 
+    private String getPath(Class<?> clazz) {
+        String path = System.getProperty("user.dir") + File.separator + "src" + File.separator;
+        String subPath = clazz.getName().replace(clazz.getSimpleName(), "")
+                .replace(".", File.separator);
+        return path + subPath;
+    }
 }

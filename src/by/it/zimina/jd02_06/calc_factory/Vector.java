@@ -11,20 +11,28 @@ class Vector extends Var {
     }
 
     Vector(double[] value) {
-        this.value = Arrays.copyOf(value,value.length);
+        this.value = Arrays.copyOf(value, value.length);
+        System.out.println("double123 " + value);
     }
 
-    Vector(String str){
-        String[] sArray = str
-                .replace("{", "")
-                .replace("}", "")
-                .replace(" ", "")
-                .split(",");
-        double[] d=new double[sArray.length];
-        for (int i = 0; i < d.length; i++) {
-            d[i]=Double.parseDouble(sArray[i]);
+    public double[] getValue() {
+        return value;
+    }
+
+    public void setValue(double[] value) {
+        this.value = value;
+    }
+
+    Vector(String strVector) {
+        StringBuilder sb = new StringBuilder(strVector);
+        sb.deleteCharAt(0).deleteCharAt(sb.length() - 1);
+        String str = sb.toString();
+        String[] arrayString = str.split("[^\\d.]+");
+        double[] arrayDouble = new double[arrayString.length];
+        for (int i = 0; i < arrayString.length; i++) {
+            arrayDouble[i] = Double.parseDouble(arrayString[i]);
         }
-        this.value=d;
+        this.value = arrayDouble;
     }
 
 

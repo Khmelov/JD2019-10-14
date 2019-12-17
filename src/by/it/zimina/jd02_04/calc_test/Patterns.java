@@ -1,4 +1,4 @@
-package by.it.zimina.jd02_06.calc_factory;
+package by.it.zimina.jd02_04.calc_test;
 
 public class Patterns {
 

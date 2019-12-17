@@ -102,21 +102,21 @@ class Matrix extends Var {
     @Override
     public Var mul(Var other) {
         if (other instanceof Scalar) {
-            double[][] mul = new double[value.length][value[0].length];
-            for (int i = 0; i < value.length; i++) {
-                for (int j = 0; j < value[0].length; j++) {
-                    mul[i][j] = value[i][j] * ((Scalar) other).getValue();
-                }
-            }
-            return new Matrix(mul);
-        }
-        if (other instanceof Vector &&
-                value.length == ((Vector) other).getValue().length) {
+                        double[][] mul = new double[value.length][value[0].length];
+                        for (int i = 0; i < value.length; i++) {
+                            for (int j = 0; j < value[0].length; j++) {
+                                mul[i][j] = value[i][j] * ((Scalar) other).getValue();
+                            }
+                        }
+                        return new Matrix(mul);
+                    }
+                    if (other instanceof Vector &&
+                            value.length == ((Vector) other).getValue().length) {
 
-            double[] mulVector = new double[value.length];
-            for (int i = 0; i < value.length; i++) {
-                for (int j = 0; j < ((Vector) other).getValue().length; j++) {
-                    mulVector[i] = mulVector[i] + value[i][j] * ((Vector) other).getValue()[j];
+                        double[] mulVector = new double[value.length];
+                        for (int i = 0; i < value.length; i++) {
+                            for (int j = 0; j < ((Vector) other).getValue().length; j++) {
+                                mulVector[i] = mulVector[i] + value[i][j] * ((Vector) other).getValue()[j];
                 }
             }
             return new Vector(mulVector);
